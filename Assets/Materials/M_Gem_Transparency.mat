@@ -86,7 +86,7 @@ Material:
     - _AlphaRange: {r: 1, g: 0, b: 0, a: 0}
     - _Color: {r: 0.25640798, g: 0.8113208, b: 0.6686885, a: 0}
     - _CutPlaneNormal: {r: -1, g: 0, b: 0, a: 0}
-    - _CutPlanePosition: {r: -1, g: -0.5, b: -1, a: 0}
+    - _CutPlanePosition: {r: -3, g: -3, b: -3, a: 0}
     - _CutPlaneTint: {r: 0, g: 1, b: 0.07320952, a: 0.4980392}
     - _FogColor: {r: 0.18770026, g: 0.3584906, b: 0.22506215, a: 0}
     - _FresnelColor: {r: 0.6415094, g: 0.3731783, b: 0.13011748, a: 1}
