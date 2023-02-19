@@ -91,8 +91,8 @@ Material:
     - _Tiling: 0.7
     m_Colors:
     - _Color: {r: 0.26330543, g: 0.9150943, b: 0.9150943, a: 0}
-    - _CutPlaneNormal: {r: -0.57735026, g: 0.57735026, b: 0.57735026, a: 0}
-    - _CutPlanePosition: {r: 8.6928005, g: 2, b: 3, a: 0}
+    - _CutPlaneNormal: {r: -0.70710677, g: 0, b: 0.70710677, a: 0}
+    - _CutPlanePosition: {r: 8.6928005, g: -3, b: 3, a: 0}
     - _CutPlaneTint: {r: 0.990566, g: 0.990566, b: 0.2569865, a: 0.24705882}
     - _FogColor: {r: 0.1549929, g: 0.4056604, b: 0.19741353, a: 0}
     - _FresnelColor: {r: 0.735849, g: 0.42114815, b: 0.17702027, a: 1}

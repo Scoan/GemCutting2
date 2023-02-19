@@ -39,13 +39,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _EmissiveIntensity: 0
     - _FresnelPower: 2
     - _NormalStrength: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0.6
     m_Colors:
-    - _Color: {r: 0.060386255, g: 0.21698111, b: 0.08617127, a: 0}
+    - _Color: {r: 0.07075472, g: 0.2830189, b: 0.10790094, a: 0}
+    - _EmissiveColor: {r: 0.040607214, g: 1, b: 0, a: 0}
     - _FresnelColor: {r: 0.21813813, g: 0.76762444, b: 0.8113208, a: 0}
     - _UVTilng: {r: 0.02, g: 0.02, b: 0, a: 0}
   m_BuildTextureStacks: []
