@@ -65,6 +65,59 @@ namespace External
         public Vector3[] Normals;
         public Vector2[] UVs;
         public int Material;
+
+        // Generate hard normals from the provided verts
+        public void GenerateHardNormals()
+        {
+            List<Vector3> normals = new();
+            for (int idx = 0; idx < Vertices.Length; idx += 3)
+            {
+                Vector3 vertA = Vertices[idx];
+                Vector3 vertB = Vertices[idx+1];
+                Vector3 vertC = Vertices[idx+2];
+                Vector3 normal = Vector3.Cross(vertB - vertC, vertB - vertA).normalized;
+                normals.AddRange(new List<Vector3>() {normal, normal, normal});
+            }
+
+            Normals = normals.ToArray();
+        }
+
+        // Generate triplanar UVs from from provided verts and normals
+        public void GenerateTriplanarUVs()
+        {
+            List<Vector2> uvs = new();
+            if (Vertices.Length != Normals.Length)
+            {
+                return;
+            }
+            for (int idx = 0; idx < Vertices.Length; idx++)
+            {
+                Vector2 uv = new();
+                Vector3 absNormal = new Vector3(Mathf.Abs(Normals[idx].x), Mathf.Abs(Normals[idx].y), Mathf.Abs(Normals[idx].z));
+                // Get major axis for the current vert's normal
+                int majorAxis = absNormal.x >= absNormal.y ? 
+                    absNormal.x >= absNormal.z ? 0 : 2 
+                    : absNormal.y >= absNormal.z ? 1 : 2;
+                switch (majorAxis)
+                {
+                    case 0: // YZ UVs
+                        uv.x = Vertices[idx].z * Mathf.Sign(Normals[idx].x);
+                        uv.y = Vertices[idx].y;
+                        break;
+                    case 1: // XZ UVs
+                        uv.x = Vertices[idx].x * Mathf.Sign(Normals[idx].y);
+                        uv.y = Vertices[idx].z;
+                        break;
+                    case 2: // XY UVs
+                        uv.x = Vertices[idx].x * -Mathf.Sign(Normals[idx].z);
+                        uv.y = Vertices[idx].y;
+                        break;
+                }
+                uvs.Add(uv);
+            }
+
+            UVs = uvs.ToArray();
+        }
     }
 
     public class MeshWelder

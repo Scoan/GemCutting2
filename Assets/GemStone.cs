@@ -20,6 +20,7 @@ public class GemStone : MonoBehaviour {
     public bool GizmoPlanes = true;
 
     public Material m_material;
+    public Material m_materialInstance;
 
     // When I originally wrote this, meshes had a ~32k vert limit, so we made a game object for each mesh
     // TODO: Update this. Do we still need multiple gameobjects/meshes?
@@ -97,6 +98,8 @@ public class GemStone : MonoBehaviour {
     }
 
     public void InitializeFromProperties() {
+        //m_materialInstance = Instantiate(m_material);
+        m_materialInstance = m_material;
         voxels = new Voxels.VoxelGrid(extents, -1);
         // TODO: Support a SEED type as well as a CUSTOM type
         // If seed, gen from seed. If custom, load from specified file?
@@ -164,38 +167,29 @@ public class GemStone : MonoBehaviour {
         CustomMesh toWeld = new CustomMesh();
         toWeld.Triangles = indices.ToArray();
         toWeld.Vertices = verts.ToArray();
-        // Calculate hard normals
-        List<Vector3> normals = new();
-        for (int idx = 0; idx < verts.Count; idx += 3)
-        {
-            Vector3 vertA = verts[idx];
-            Vector3 vertB = verts[idx+1];
-            Vector3 vertC = verts[idx+2];
-            Vector3 normal = Vector3.Cross(vertB - vertC, vertB - vertA).normalized;
-            normals.AddRange(new List<Vector3>() {normal, normal, normal});
-        }
-        toWeld.Normals = normals.ToArray();
+        toWeld.GenerateHardNormals();
+        toWeld.GenerateTriplanarUVs();
         MeshWelder welder = new MeshWelder(toWeld);
-        indices = welder.CustomMesh.Triangles.ToList();
-        verts = welder.CustomMesh.Vertices.ToList();
         //Profiling.Profiler.EndSample();
 
         // Welder returns tri indices in reverse order, for some reason
-        indices.Reverse();
+        welder.CustomMesh.Triangles = welder.CustomMesh.Triangles.Reverse().ToArray();
         
         Mesh mesh = new Mesh();
         mesh.indexFormat = IndexFormat.UInt32;
-        mesh.SetVertices(verts);
-        mesh.SetTriangles(indices, 0);
+        mesh.SetVertices(welder.CustomMesh.Vertices);
+        mesh.SetTriangles(welder.CustomMesh.Triangles, 0);
+        mesh.SetNormals(welder.CustomMesh.Normals);
+        mesh.SetUVs(0, welder.CustomMesh.UVs);
         mesh.RecalculateBounds();
-        mesh.RecalculateNormals();
+        //mesh.RecalculateNormals();
         mesh.RecalculateTangents();
 
         GameObject go = new GameObject("Mesh");
         go.transform.parent = transform;
         go.AddComponent<MeshFilter>();
         go.AddComponent<MeshRenderer>();
-        go.GetComponent<Renderer>().material = m_material;
+        go.GetComponent<Renderer>().material = m_materialInstance;
         go.GetComponent<MeshFilter>().mesh = mesh;
         go.layer = this.gameObject.layer;
 
@@ -207,8 +201,8 @@ public class GemStone : MonoBehaviour {
     {
         Vector3Int planePos = voxels.GetCoordinateFurthestAlongAngle(planeNormal);
         Vector3 planeWorldPos = CoordToWorldPos(planePos.x, planePos.y, planePos.z);
-        m_material.SetVector("_CutPlanePosition", new Vector4(planeWorldPos.x, planeWorldPos.y, planeWorldPos.z, 0));
-        m_material.SetVector("_CutPlaneNormal", new Vector4(planeNormal.x, planeNormal.y, planeNormal.z, 0));
+        m_materialInstance.SetVector("_CutPlanePosition", new Vector4(planeWorldPos.x, planeWorldPos.y, planeWorldPos.z, 0));
+        m_materialInstance.SetVector("_CutPlaneNormal", new Vector4(planeNormal.x, planeNormal.y, planeNormal.z, 0));
     }
 
     private void OnDrawGizmos()
