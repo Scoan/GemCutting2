@@ -71,7 +71,7 @@ Material:
     - _Tiling: 0.1
     m_Colors:
     - _CutPlaneNormal: {r: -1, g: 0, b: 0, a: 0}
-    - _CutPlanePosition: {r: -3, g: -3, b: -3, a: 0}
+    - _CutPlanePosition: {r: -34.5, g: -33.5, b: -34.5, a: 0}
     - _CutPlaneTint: {r: 1, g: 1, b: 1, a: 0.15686275}
     - _Tint: {r: 1, g: 0.259434, b: 0.259434, a: 0}
     - _UVTiling: {r: 0.2, g: 0.2, b: 0, a: 0}

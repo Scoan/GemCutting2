@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using ProceduralNoiseProject;
 using MarchingCubesProject;
 using System.Linq;
-using Voxels;
 using GemStoneCatalog;
 using System;
+using External;
+using UnityEngine.Rendering;
 
 
 public class GemStone : MonoBehaviour {
@@ -160,51 +159,48 @@ public class GemStone : MonoBehaviour {
         //Would need to weld vertices for better quality mesh.
         //Profiling.Profiler.BeginSample("My Sample");
         marching.Generate(visualGrid.values, visualGrid.extents.x, visualGrid.extents.y, visualGrid.extents.z, verts, indices);
+
+        // Weld verts in resulting mesh
+        CustomMesh toWeld = new CustomMesh();
+        toWeld.Triangles = indices.ToArray();
+        toWeld.Vertices = verts.ToArray();
+        // Calculate hard normals
+        List<Vector3> normals = new();
+        for (int idx = 0; idx < verts.Count; idx += 3)
+        {
+            Vector3 vertA = verts[idx];
+            Vector3 vertB = verts[idx+1];
+            Vector3 vertC = verts[idx+2];
+            Vector3 normal = Vector3.Cross(vertB - vertC, vertB - vertA).normalized;
+            normals.AddRange(new List<Vector3>() {normal, normal, normal});
+        }
+        toWeld.Normals = normals.ToArray();
+        MeshWelder welder = new MeshWelder(toWeld);
+        indices = welder.CustomMesh.Triangles.ToList();
+        verts = welder.CustomMesh.Vertices.ToList();
         //Profiling.Profiler.EndSample();
 
-        //A mesh in unity can only be made up of 65000 verts.
-        //Need to split the verts between multiple meshes.
+        // Welder returns tri indices in reverse order, for some reason
+        indices.Reverse();
+        
+        Mesh mesh = new Mesh();
+        mesh.indexFormat = IndexFormat.UInt32;
+        mesh.SetVertices(verts);
+        mesh.SetTriangles(indices, 0);
+        mesh.RecalculateBounds();
+        mesh.RecalculateNormals();
+        mesh.RecalculateTangents();
 
-        int maxVertsPerMesh = 30000; //must be divisible by 3, ie 3 verts == 1 triangle
-        int numMeshes = verts.Count / maxVertsPerMesh + 1;
+        GameObject go = new GameObject("Mesh");
+        go.transform.parent = transform;
+        go.AddComponent<MeshFilter>();
+        go.AddComponent<MeshRenderer>();
+        go.GetComponent<Renderer>().material = m_material;
+        go.GetComponent<MeshFilter>().mesh = mesh;
+        go.layer = this.gameObject.layer;
 
-        for (int i = 0; i < numMeshes; i++)
-        {
-
-            List<Vector3> splitVerts = new List<Vector3>();
-            List<int> splitIndices = new List<int>();
-
-            for (int j = 0; j < maxVertsPerMesh; j++)
-            {
-                int idx = i * maxVertsPerMesh + j;
-
-                if (idx < verts.Count)
-                {
-                    splitVerts.Add(verts[idx]);
-                    splitIndices.Add(j);
-                }
-            }
-
-            if (splitVerts.Count == 0) continue;
-
-            Mesh mesh = new Mesh();
-            mesh.SetVertices(splitVerts);
-            mesh.SetTriangles(splitIndices, 0);
-            mesh.RecalculateBounds();
-            mesh.RecalculateNormals();
-
-            // TODO: Instead of creating a game object per 30k mesh, create a rendercomponent on one object
-            GameObject go = new GameObject("Mesh");
-            go.transform.parent = transform;
-            go.AddComponent<MeshFilter>();
-            go.AddComponent<MeshRenderer>();
-            go.GetComponent<Renderer>().material = m_material;
-            go.GetComponent<MeshFilter>().mesh = mesh;
-            go.layer = this.gameObject.layer;
-
-            go.transform.localPosition = new Vector3(-(float)visualGrid.extents.x / 2.0f, -(float)visualGrid.extents.y / 2.0f, -(float)visualGrid.extents.z / 2.0f);
-            meshes.Add(go);
-        }
+        go.transform.localPosition = new Vector3(-(float)visualGrid.extents.x / 2.0f, -(float)visualGrid.extents.y / 2.0f, -(float)visualGrid.extents.z / 2.0f);
+        meshes.Add(go);
     }
 
     public void UpdateSlicePreview(Vector3 planeNormal)
