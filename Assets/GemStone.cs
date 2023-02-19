@@ -19,8 +19,7 @@ public class GemStone : MonoBehaviour {
 
     public bool GizmoPlanes = true;
 
-    public Material m_material;
-    public Material m_materialInstance;
+    public List<Material> m_materials = new();
 
     // When I originally wrote this, meshes had a ~32k vert limit, so we made a game object for each mesh
     // TODO: Update this. Do we still need multiple gameobjects/meshes?
@@ -98,8 +97,6 @@ public class GemStone : MonoBehaviour {
     }
 
     public void InitializeFromProperties() {
-        //m_materialInstance = Instantiate(m_material);
-        m_materialInstance = m_material;
         voxels = new Voxels.VoxelGrid(extents, -1);
         // TODO: Support a SEED type as well as a CUSTOM type
         // If seed, gen from seed. If custom, load from specified file?
@@ -185,24 +182,30 @@ public class GemStone : MonoBehaviour {
         //mesh.RecalculateNormals();
         mesh.RecalculateTangents();
 
-        GameObject go = new GameObject("Mesh");
-        go.transform.parent = transform;
-        go.AddComponent<MeshFilter>();
-        go.AddComponent<MeshRenderer>();
-        go.GetComponent<Renderer>().material = m_materialInstance;
-        go.GetComponent<MeshFilter>().mesh = mesh;
-        go.layer = this.gameObject.layer;
+        foreach (Material material in m_materials)
+        {
+            GameObject go = new GameObject("Mesh");
+            go.transform.parent = transform;
+            go.AddComponent<MeshFilter>();
+            go.AddComponent<MeshRenderer>();
+            go.GetComponent<Renderer>().material = material;
+            go.GetComponent<MeshFilter>().mesh = mesh;
+            go.layer = this.gameObject.layer;
 
-        go.transform.localPosition = new Vector3(-(float)visualGrid.extents.x / 2.0f, -(float)visualGrid.extents.y / 2.0f, -(float)visualGrid.extents.z / 2.0f);
-        meshes.Add(go);
+            go.transform.localPosition = new Vector3(-(float)visualGrid.extents.x / 2.0f, -(float)visualGrid.extents.y / 2.0f, -(float)visualGrid.extents.z / 2.0f);
+            meshes.Add(go);
+        }
     }
 
     public void UpdateSlicePreview(Vector3 planeNormal)
     {
         Vector3Int planePos = voxels.GetCoordinateFurthestAlongAngle(planeNormal);
         Vector3 planeWorldPos = CoordToWorldPos(planePos.x, planePos.y, planePos.z);
-        m_materialInstance.SetVector("_CutPlanePosition", new Vector4(planeWorldPos.x, planeWorldPos.y, planeWorldPos.z, 0));
-        m_materialInstance.SetVector("_CutPlaneNormal", new Vector4(planeNormal.x, planeNormal.y, planeNormal.z, 0));
+        foreach (Material material in m_materials)
+        {
+            material.SetVector("_CutPlanePosition", new Vector4(planeWorldPos.x, planeWorldPos.y, planeWorldPos.z, 0));
+            material.SetVector("_CutPlaneNormal", new Vector4(planeNormal.x, planeNormal.y, planeNormal.z, 0));
+        }
     }
 
     private void OnDrawGizmos()

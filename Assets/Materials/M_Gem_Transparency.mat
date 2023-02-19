@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6466427209499379974
+--- !u!114 &-3432509567598891377
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Gem
-  m_Shader: {fileID: -6465566751694194690, guid: c4bf4f90380091948b136623b7a03e21,
+  m_Name: M_Gem_Transparency
+  m_Shader: {fileID: -6465566751694194690, guid: baf8610177eaeea45830ce6fcd4b4ee9,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -34,16 +34,12 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Normal:
-        m_Texture: {fileID: 2800000, guid: 2ab533743b5de5447bb84e4eec91f432, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _TexAO:
         m_Texture: {fileID: 2800000, guid: 7a48ccfbb7f536741a67757fe52ac13e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TexAlbedo:
-        m_Texture: {fileID: 2800000, guid: 7a48ccfbb7f536741a67757fe52ac13e, type: 3}
+        m_Texture: {fileID: 2800000, guid: ff1edb261f3ddb247acb105ab726d7af, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TexHeight:
@@ -56,10 +52,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _TexRoughness:
         m_Texture: {fileID: 2800000, guid: e552ac50fe8e203488522a27ae69aa82, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture2DAsset_ab5ebf21cc484e1dbe2e96ad13323716_Out_0:
-        m_Texture: {fileID: 2800000, guid: fde34872d2321ae448395632e48494a8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -77,6 +69,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AO_Strength: 0
+    - _Alpha: 0.99
     - _CutPlaneFalloff: 2
     - _CutPlanePulseRate: 4
     - _FogPower: 1
@@ -88,15 +81,14 @@ Material:
     - _QueueOffset: 0
     - _Smoothness: 0.6
     - _SurfaceNormalStrength: 0.4
-    - _Tiling: 0.7
     m_Colors:
-    - _Color: {r: 0.26330543, g: 0.9150943, b: 0.9150943, a: 0}
+    - _AlphaRange: {r: 1, g: 0, b: 0, a: 0}
+    - _Color: {r: 0.25640798, g: 0.8113208, b: 0.6686885, a: 0}
     - _CutPlaneNormal: {r: -0.57735026, g: 0.57735026, b: 0.57735026, a: 0}
-    - _CutPlanePosition: {r: 8.6928005, g: 2, b: 3, a: 0}
-    - _CutPlaneTint: {r: 0.990566, g: 0.990566, b: 0.2569865, a: 0.24705882}
-    - _FogColor: {r: 0.1549929, g: 0.4056604, b: 0.19741353, a: 0}
-    - _FresnelColor: {r: 0.735849, g: 0.42114815, b: 0.17702027, a: 1}
+    - _CutPlanePosition: {r: -3, g: 2, b: 3, a: 0}
+    - _CutPlaneTint: {r: 0, g: 1, b: 0.07320952, a: 0.4980392}
+    - _FogColor: {r: 0.18770026, g: 0.3584906, b: 0.22506215, a: 0}
+    - _FresnelColor: {r: 0.6415094, g: 0.3731783, b: 0.13011748, a: 1}
     - _SurfaceNormalTiling: {r: 0.1, g: 0.1, b: 0, a: 0}
-    - _Tint: {r: 0.7169812, g: 0.2807049, b: 0.2807049, a: 0}
     - _UVTiling: {r: 0.07, g: 0.03, b: 0, a: 0}
   m_BuildTextureStacks: []
