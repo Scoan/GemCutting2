@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using System.Collections.Generic;
-using PlayerInputUtils;
 using ProceduralNoiseProject;
-using B83.MeshHelper;
 
 namespace MarchingCubesProject
 {
