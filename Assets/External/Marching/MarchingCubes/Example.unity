@@ -20,8 +20,8 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.4723211, g: 0.4944985, b: 0.5471698, a: 1}
-  m_AmbientEquatorColor: {r: 0.38679248, g: 0.37402102, b: 0.37402102, a: 1}
+  m_AmbientSkyColor: {r: 0.9411765, g: 0.9882353, b: 1.0980393, a: 1}
+  m_AmbientEquatorColor: {r: 0.50356, g: 0.82760483, b: 0.8679246, a: 1}
   m_AmbientGroundColor: {r: 0.20754719, g: 0.19677822, b: 0.19677822, a: 1}
   m_AmbientIntensity: 0.5
   m_AmbientMode: 1
@@ -990,7 +990,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 44d98e2ecdd808a4ca6228718a718d7b, type: 2}
+  - {fileID: 2100000, guid: 47099bd8a58375d4b9937a9acc493588, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3267,7 +3267,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3706,7 +3706,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 45
+  field of view: 30
   orthographic: 0
   orthographic size: 100
   m_Depth: 0

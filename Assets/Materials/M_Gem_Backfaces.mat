@@ -44,12 +44,12 @@ Material:
     - _NormalStrength: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothness: 0.6
+    - _Smoothness: 0.7
     m_Colors:
-    - _Color: {r: 0.07075472, g: 0.2830189, b: 0.10790094, a: 0}
+    - _Color: {r: 0.083481655, g: 0.26415092, b: 0.115744025, a: 0}
     - _EmissiveColor: {r: 0.040607214, g: 1, b: 0, a: 0}
-    - _FresnelColor: {r: 0.21813813, g: 0.76762444, b: 0.8113208, a: 0}
-    - _UVTilng: {r: 0.02, g: 0.02, b: 0, a: 0}
+    - _FresnelColor: {r: 0, g: 1, b: 0.55525136, a: 0}
+    - _UVTilng: {r: 0.01, g: 0.01, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6212072697089143477
 MonoBehaviour:
