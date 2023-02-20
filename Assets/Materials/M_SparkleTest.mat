@@ -21,6 +21,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _SparkleHeight:
+        m_Texture: {fileID: 2800000, guid: c0896cf04aab52640bccaaff2522851e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SparkleMap:
         m_Texture: {fileID: 2800000, guid: 8de49c57821d63743bca4c0facb62048, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -40,13 +44,17 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaCutoff: 0.3
+    - _ParallaxAmplitude: 1600
+    - _ParallaxFresnelPower: 1
+    - _ParallaxMinAmplitude: 0
     - _Pow: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SparklePower: 5
     - _SparkleVectorMul: 3
     m_Colors:
-    - _UVTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _SmoothStepParams: {r: 0, g: 0.8, b: 0, a: 0}
+    - _UVTiling: {r: 5, g: 5, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5010236510012315831
 MonoBehaviour:
