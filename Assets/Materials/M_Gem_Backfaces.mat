@@ -41,14 +41,14 @@ Material:
     m_Floats:
     - _EmissiveIntensity: 0
     - _FresnelPower: 2
-    - _NormalStrength: 1
+    - _NormalStrength: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0.7
     m_Colors:
-    - _Color: {r: 0.083481655, g: 0.26415092, b: 0.115744025, a: 0}
+    - _Color: {r: 0.3207547, g: 0.10137059, b: 0.27317533, a: 0}
     - _EmissiveColor: {r: 0.040607214, g: 1, b: 0, a: 0}
-    - _FresnelColor: {r: 0, g: 1, b: 0.55525136, a: 0}
+    - _FresnelColor: {r: 1, g: 1, b: 1, a: 0}
     - _UVTilng: {r: 0.01, g: 0.01, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6212072697089143477
