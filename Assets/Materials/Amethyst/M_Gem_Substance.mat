@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_Gem_Substance
+  m_Shader: {fileID: -6465566751694194690, guid: fbde501f604961b4ba9d1f5ac3c79f45,
+    type: 3}
+  m_ValidKeywords:
+  - _SPARKLES
+  m_InvalidKeywords: []
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _ParallaxSparkles_b0d8e82bb40e428a872de17ca546db5e_SparkleHeight_2319182550:
+        m_Texture: {fileID: 2800000, guid: c0896cf04aab52640bccaaff2522851e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxSparkles_b0d8e82bb40e428a872de17ca546db5e_SparkleMap_3032645219:
+        m_Texture: {fileID: 2800000, guid: 8de49c57821d63743bca4c0facb62048, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexAO:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexAlbedo:
+        m_Texture: {fileID: 2800000, guid: 81cae58f12932a042ac7ae5f692c6839, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexFogHeight:
+        m_Texture: {fileID: 2800000, guid: 75fccf8682c533d44a3a3f82723ad487, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexHeight:
+        m_Texture: {fileID: 2800000, guid: 1a13a6afb82f99749a5031f9552f3f3e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexNormal:
+        m_Texture: {fileID: 2800000, guid: bddb52186bcce1d44b326b139e361568, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexRoughness:
+        m_Texture: {fileID: 2800000, guid: ce198cced12b8be44a21e4bfc9b31f01, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexShallowColor:
+        m_Texture: {fileID: 2800000, guid: 2ee52c6bab956a84f86e96000e9679ec, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexShallowHeight:
+        m_Texture: {fileID: 2800000, guid: 1a13a6afb82f99749a5031f9552f3f3e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexSurfaceColor:
+        m_Texture: {fileID: 2800000, guid: 81cae58f12932a042ac7ae5f692c6839, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexSurfaceHeight:
+        m_Texture: {fileID: 2800000, guid: 1a13a6afb82f99749a5031f9552f3f3e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexSurfaceNormal:
+        m_Texture: {fileID: 2800000, guid: bddb52186bcce1d44b326b139e361568, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexSurfaceRoughness:
+        m_Texture: {fileID: 2800000, guid: ce198cced12b8be44a21e4bfc9b31f01, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexSurfaceScratches:
+        m_Texture: {fileID: 2800000, guid: 2a554374db2e8cf48b22e7be140e0dae, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AO_Strength: 1
+    - _Alpha: 0.95
+    - _CutPlaneFalloff: 2
+    - _CutPlaneIntensity: 1
+    - _CutPlanePulseRate: 4
+    - _FogDeepDepth: 0.05
+    - _FogHeightmplitude: 3
+    - _FogPower: 1
+    - _FogStrength: 1
+    - _FresnelPower: 3
+    - _NormalStrength: 1
+    - _ParallaxAmplitude: 1
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _SPARKLES: 1
+    - _ShallowHeightAmplitude: 3
+    - _Smoothness: 1
+    - _SparkleBias: 3
+    - _SparkleMaxHeight: 15
+    - _SparkleMinHeight: 0
+    - _SparkleOpacity: 0.4
+    - _SparkleRotateSpeed: 0.1
+    - _SurfaceHeightAmplitude: 1
+    - _SurfaceNormalStrength: 1
+    m_Colors:
+    - _AlphaRange: {r: 1, g: 1, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _CutPlaneNormal: {r: -1, g: 0, b: 0, a: 0}
+    - _CutPlanePosition: {r: -3, g: -3, b: -3, a: 0}
+    - _CutPlaneTint: {r: 0, g: 1, b: 0.07320952, a: 0.4980392}
+    - _FogColor: {r: 0.745283, g: 0.1722588, b: 0.6607296, a: 0}
+    - _FogColorDeep: {r: 0.26415092, g: 0.11089354, b: 0.24690776, a: 0}
+    - _FogColorShallow: {r: 0.764151, g: 0.19824673, b: 0.7522371, a: 0}
+    - _FogTiling: {r: 0.3, g: 0.3, b: 0, a: 0}
+    - _FresnelColor: {r: 0.6603774, g: 0.12771448, b: 0.39574692, a: 1}
+    - _SparkleSmoothStepParams: {r: 0.8, g: 1, b: 0, a: 0}
+    - _SparkleTiling: {r: 0.3, g: 0.3, b: 0, a: 0}
+    - _SurfaceNormalTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _UVTiling: {r: 0.05, g: 0.05, b: 0, a: 0}
+  m_BuildTextureStacks: []
+--- !u!114 &8885343146667359509
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 5
