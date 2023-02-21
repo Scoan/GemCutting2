@@ -44,7 +44,7 @@ namespace GemStoneCatalog
 
         public AidennMask() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
         }
     }
 
@@ -64,7 +64,7 @@ namespace GemStoneCatalog
 
         public Amanti() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -109,7 +109,7 @@ namespace GemStoneCatalog
 
         public Amunet() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -126,7 +126,7 @@ namespace GemStoneCatalog
 
         public Appolonia() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -142,7 +142,7 @@ namespace GemStoneCatalog
 
         public Bastet() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -156,7 +156,7 @@ namespace GemStoneCatalog
 
         public Bridge() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -177,7 +177,7 @@ namespace GemStoneCatalog
 
         public CatsEye() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, false, true);
         }
     }
@@ -204,7 +204,7 @@ namespace GemStoneCatalog
 
         public Choronzon() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
         }
     }
 
@@ -218,7 +218,7 @@ namespace GemStoneCatalog
 
         public CornerHeart() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -237,7 +237,7 @@ namespace GemStoneCatalog
 
         public Crater() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -262,7 +262,7 @@ namespace GemStoneCatalog
 
         public Dalessi() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -289,7 +289,7 @@ namespace GemStoneCatalog
 
         public DragynsEye() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
         }
     }
 
@@ -306,7 +306,7 @@ namespace GemStoneCatalog
 
         public Eyelet() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -324,7 +324,7 @@ namespace GemStoneCatalog
 
         public FullAidennMask() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -345,7 +345,7 @@ namespace GemStoneCatalog
 
         public FullEye() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -369,7 +369,7 @@ namespace GemStoneCatalog
 
         public HexasPlate() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(true, true, true);
         }
     }
@@ -400,7 +400,7 @@ namespace GemStoneCatalog
 
         public HilesChevrons() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, true);
         }
     }
@@ -427,7 +427,7 @@ namespace GemStoneCatalog
 
         public KhufusShip() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -470,7 +470,7 @@ namespace GemStoneCatalog
 
         public KingsTomb() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -486,7 +486,7 @@ namespace GemStoneCatalog
 
         public Lens() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -504,7 +504,7 @@ namespace GemStoneCatalog
 
         public LookingGlass() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -530,7 +530,7 @@ namespace GemStoneCatalog
 
         public Lotus() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -568,7 +568,7 @@ namespace GemStoneCatalog
 
         public MoorishArch() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -585,7 +585,7 @@ namespace GemStoneCatalog
 
         public OsirisEye() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -606,7 +606,7 @@ namespace GemStoneCatalog
 
         public Prism() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -634,7 +634,7 @@ namespace GemStoneCatalog
 
         public QueensTomb() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -664,7 +664,7 @@ namespace GemStoneCatalog
 
         public RasLantern() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -682,7 +682,7 @@ namespace GemStoneCatalog
 
         public Reflection() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -705,7 +705,7 @@ namespace GemStoneCatalog
 
         public Refractor() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -727,7 +727,7 @@ namespace GemStoneCatalog
 
         public Ring() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -754,7 +754,7 @@ namespace GemStoneCatalog
 
         public ShenOfHorus() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -773,7 +773,7 @@ namespace GemStoneCatalog
 
         public Solarkin() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -800,7 +800,7 @@ namespace GemStoneCatalog
 
         public Sprocket() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
             RotateY();
             RotateY();
@@ -823,7 +823,7 @@ namespace GemStoneCatalog
 
         public Suspension() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -844,7 +844,7 @@ namespace GemStoneCatalog
 
         public Symmetry() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -874,7 +874,7 @@ namespace GemStoneCatalog
 
         public TheFox() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
             RotateZ();
         }
@@ -896,7 +896,7 @@ namespace GemStoneCatalog
 
         public TheShark() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -920,7 +920,7 @@ namespace GemStoneCatalog
 
         public Thistle() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -945,7 +945,7 @@ namespace GemStoneCatalog
 
         public ThothsKnot() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -980,7 +980,7 @@ namespace GemStoneCatalog
 
         public TikiMask() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -997,7 +997,7 @@ namespace GemStoneCatalog
 
         public Tombstone() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -1011,7 +1011,7 @@ namespace GemStoneCatalog
 
         public Triclops() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -1038,7 +1038,7 @@ namespace GemStoneCatalog
 
         public Unity() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }
@@ -1068,7 +1068,7 @@ namespace GemStoneCatalog
 
         public TEST_GEM() : base(__extents)
         {
-            values = __voxels;
+            m_values = __voxels;
             Mirror(false, true, false);
         }
     }

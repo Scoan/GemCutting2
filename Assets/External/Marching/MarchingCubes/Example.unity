@@ -153,13 +153,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 34
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &18895802
 Transform:
   m_ObjectHideFlags: 0
@@ -301,13 +300,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 11
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &37703490
 Transform:
   m_ObjectHideFlags: 0
@@ -352,13 +350,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 2
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &38179997
 Transform:
   m_ObjectHideFlags: 0
@@ -403,13 +400,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 15
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &95534935
 Transform:
   m_ObjectHideFlags: 0
@@ -454,13 +450,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 29
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &149662231
 Transform:
   m_ObjectHideFlags: 0
@@ -511,13 +506,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 6
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &246127403
 Transform:
   m_ObjectHideFlags: 0
@@ -562,13 +556,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 39
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &297360298
 Transform:
   m_ObjectHideFlags: 0
@@ -714,13 +707,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 32
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &352358329
 Transform:
   m_ObjectHideFlags: 0
@@ -827,13 +819,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 28
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &428339594
 Transform:
   m_ObjectHideFlags: 0
@@ -878,13 +869,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 27
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &457600213
 Transform:
   m_ObjectHideFlags: 0
@@ -929,13 +919,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 12
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &458314738
 Transform:
   m_ObjectHideFlags: 0
@@ -1077,13 +1066,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 1
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &577261699
 Transform:
   m_ObjectHideFlags: 0
@@ -1160,6 +1148,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114515612551099890, guid: 843452af718e85344922bcd9d6ec7bd3,
         type: 3}
+      propertyPath: m_gizmoPlanes
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114515612551099890, guid: 843452af718e85344922bcd9d6ec7bd3,
+        type: 3}
       propertyPath: m_materials.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -1204,13 +1197,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 24
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &732811323
 Transform:
   m_ObjectHideFlags: 0
@@ -1255,13 +1247,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 17
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &744868457
 Transform:
   m_ObjectHideFlags: 0
@@ -1306,13 +1297,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 9
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &774276671
 Transform:
   m_ObjectHideFlags: 0
@@ -1357,13 +1347,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 20
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &788364395
 Transform:
   m_ObjectHideFlags: 0
@@ -1408,13 +1397,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 35
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &846874257
 Transform:
   m_ObjectHideFlags: 0
@@ -1459,13 +1447,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 43
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &949146746
 Transform:
   m_ObjectHideFlags: 0
@@ -1704,13 +1691,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 42
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &996066025
 Transform:
   m_ObjectHideFlags: 0
@@ -1755,13 +1741,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 25
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1042366450
 Transform:
   m_ObjectHideFlags: 0
@@ -1831,6 +1816,11 @@ PrefabInstance:
       propertyPath: Gem
       value: 
       objectReference: {fileID: 2059078857}
+    - target: {fileID: 114560483081928644, guid: 735efba0d34bef5408c893bf062048c5,
+        type: 3}
+      propertyPath: m_gem
+      value: 
+      objectReference: {fileID: 2059078857}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 735efba0d34bef5408c893bf062048c5, type: 3}
 --- !u!1 &1050961128
@@ -1862,14 +1852,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials:
   - {fileID: 2100000, guid: e48f6822a755c0343a3d72fc26837b0c, type: 2}
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 1
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1050961130
 Transform:
   m_ObjectHideFlags: 0
@@ -1914,13 +1903,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 40
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1059481890
 Transform:
   m_ObjectHideFlags: 0
@@ -1965,13 +1953,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 8
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1064931036
 Transform:
   m_ObjectHideFlags: 0
@@ -2131,13 +2118,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 7
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1204060988
 Transform:
   m_ObjectHideFlags: 0
@@ -2182,13 +2168,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 41
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1317987731
 Transform:
   m_ObjectHideFlags: 0
@@ -2233,13 +2218,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 22
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1328082494
 Transform:
   m_ObjectHideFlags: 0
@@ -2284,13 +2268,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 3
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1348874095
 Transform:
   m_ObjectHideFlags: 0
@@ -2335,13 +2318,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 4
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1379308631
 Transform:
   m_ObjectHideFlags: 0
@@ -2386,13 +2368,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 33
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1428517909
 Transform:
   m_ObjectHideFlags: 0
@@ -2484,13 +2465,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 38
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1555950212
 Transform:
   m_ObjectHideFlags: 0
@@ -2677,13 +2657,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 37
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1697001195
 Transform:
   m_ObjectHideFlags: 0
@@ -2728,13 +2707,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 18
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1704029948
 Transform:
   m_ObjectHideFlags: 0
@@ -2908,13 +2886,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 13
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1770860119
 Transform:
   m_ObjectHideFlags: 0
@@ -2959,13 +2936,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 16
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1774122424
 Transform:
   m_ObjectHideFlags: 0
@@ -3010,13 +2986,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 36
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1774527494
 Transform:
   m_ObjectHideFlags: 0
@@ -3061,13 +3036,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 21
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1796494636
 Transform:
   m_ObjectHideFlags: 0
@@ -3112,13 +3086,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 14
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1798961065
 Transform:
   m_ObjectHideFlags: 0
@@ -3163,13 +3136,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 26
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1800379280
 Transform:
   m_ObjectHideFlags: 0
@@ -3214,13 +3186,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 19
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1841308786
 Transform:
   m_ObjectHideFlags: 0
@@ -3394,13 +3365,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 23
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1873120103
 Transform:
   m_ObjectHideFlags: 0
@@ -3445,13 +3415,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 10
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1910269830
 Transform:
   m_ObjectHideFlags: 0
@@ -3496,13 +3465,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 5
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1960483466
 Transform:
   m_ObjectHideFlags: 0
@@ -3547,13 +3515,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 31
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1974402472
 Transform:
   m_ObjectHideFlags: 0
@@ -3598,13 +3565,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_showGizmoPlanes: 1
   m_materials: []
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 30
-  seed: 0
-  purityBias: 0.15
+  m_gemType: 0
+  m_size: {x: 7, y: 7, z: 7}
+  m_seed: 0
+  m_purityBias: 0.15
 --- !u!4 &1989201210
 Transform:
   m_ObjectHideFlags: 0

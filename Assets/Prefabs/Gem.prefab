@@ -44,11 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3510c0838f0894345b5f664c3d6b9145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GizmoPlanes: 1
+  m_gizmoPlanes: 1
   m_materials:
   - {fileID: 2100000, guid: e48f6822a755c0343a3d72fc26837b0c, type: 2}
-  meshes: []
-  extents: {x: 7, y: 7, z: 7}
-  GemOverride: 0
-  seed: 42069
-  purityBias: 0.05
+  m_meshes: []
+  m_extents: {x: 7, y: 7, z: 7}
+  m_gemOverride: 0
+  m_seed: 42069
+  m_purityBias: 0.05

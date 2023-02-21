@@ -68,8 +68,7 @@ public class CatalogPanel : MonoBehaviour {
     {
         if (_gem == null)
             return;
-        _gem.GemOverride = gemType;
-        _gem.InitializeFromProperties();
+        _gem.GemType = gemType;
     }
 
     public void OnVisibilityToggled(bool visible)
