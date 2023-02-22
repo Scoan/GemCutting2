@@ -55,7 +55,7 @@ public class GemStone : MonoBehaviour {
             m_size = value;
             GenerateVoxelsAndMesh();
         }
-        get => m_size;
+        get => m_voxels?.m_extents ?? m_size;
     }
 
     public GemTypes GemType
