@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 
 namespace GemCutting
@@ -44,74 +44,62 @@ namespace GemCutting
 
         private void Update()
         {
-            if (m_gem == null)
+            if (m_gem != null)
             {
-                return;
-            }
-
-            if (m_inputEnabled)
-            {
-                ProcessInput();
+                if (m_inputEnabled)
+                {
+                    HandleInput();
+                }
+                // TODO: Perf of calling this every frame?
+                m_gem.UpdateSlicePreview(m_curCutAngle);
             }
         }
 
         void FixedUpdate () {
             if (m_gem != null && m_postRotateAction != null)
             {
-                ProcessRotation();
+                //ProcessRotation();
             }
         }
 
-        private void ProcessInput()
+        private void HandleInput()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                SliceGem();
+                m_gem.Slice(m_curCutAngle);
                 return;
             }
 
             // Gem rotation inputs
             if (Input.GetKey(KeyCode.Z))
             {
-                m_inputEnabled = false;
-                //m_targetRotation = m_gem.transform.rotation * Quaternion.AngleAxis(90, new Vector3(0, 1, 0));
-                m_targetRotation = Quaternion.AngleAxis(90, new Vector3(0, 1, 0));
-                m_postRotateAction = (gem) => { gem.Voxels.RotateY(); gem.UpdateMesh(); m_gem.UpdateSlicePreview(m_curCutAngle); return true; };
+                m_targetRotation = Quaternion.AngleAxis(90, new Vector3(0, 1, 0)) * m_gem.transform.rotation;
+                TriggerRotation();
             }
             else if (Input.GetKey(KeyCode.X))
             {
-                m_inputEnabled = false;
-                //m_targetRotation = m_gem.transform.rotation * Quaternion.AngleAxis(-90, new Vector3(0, 1, 0));
-                m_targetRotation = Quaternion.AngleAxis(-90, new Vector3(0, 1, 0));
-                m_postRotateAction = (gem) => { gem.Voxels.RotateY(ccw: true); gem.UpdateMesh(); m_gem.UpdateSlicePreview(m_curCutAngle); return true; };
+                m_targetRotation = Quaternion.AngleAxis(-90, new Vector3(0, 1, 0)) * m_gem.transform.rotation;
+                TriggerRotation();
             }
             else if (Input.GetKey(KeyCode.Q))
             {
-                m_inputEnabled = false;
-                //m_targetRotation = m_gem.transform.rotation * Quaternion.AngleAxis(90, new Vector3(0, 0, 1));
-                m_targetRotation = Quaternion.AngleAxis(90, new Vector3(0, 0, 1));
-                m_postRotateAction = (gem) => { gem.Voxels.RotateZ(ccw: true); gem.UpdateMesh(); m_gem.UpdateSlicePreview(m_curCutAngle); return true; };
+                m_targetRotation = Quaternion.AngleAxis(90, new Vector3(0, 0, 1)) * m_gem.transform.rotation;
+                TriggerRotation();
             }
             else if (Input.GetKey(KeyCode.E))
             {
-                m_inputEnabled = false;
-                //m_targetRotation = m_gem.transform.rotation * Quaternion.AngleAxis(-90, new Vector3(0, 0, 1));
-                m_targetRotation = Quaternion.AngleAxis(-90, new Vector3(0, 0, 1));
-                m_postRotateAction = (gem) => { gem.Voxels.RotateZ(); gem.UpdateMesh(); m_gem.UpdateSlicePreview(m_curCutAngle); return true; };
+                m_targetRotation = Quaternion.AngleAxis(-90, new Vector3(0, 0, 1)) * m_gem.transform.rotation;
+                TriggerRotation();
             }
             else if (Input.GetKey(KeyCode.R))
             {
-                m_inputEnabled = false;
-                //m_targetRotation = m_gem.transform.rotation * Quaternion.AngleAxis(90, new Vector3(1, 0, 0));
-                m_targetRotation = Quaternion.AngleAxis(90, new Vector3(1, 0, 0));
-                m_postRotateAction = (gem) => { gem.Voxels.RotateX(ccw: true); gem.UpdateMesh(); m_gem.UpdateSlicePreview(m_curCutAngle); return true; };
+                m_targetRotation = Quaternion.AngleAxis(90, new Vector3(1, 0, 0)) * m_gem.transform.rotation;
+                TriggerRotation();
             }
             else if (Input.GetKey(KeyCode.F))
             {
-                m_inputEnabled = false;
-                //m_targetRotation = m_gem.transform.rotation * Quaternion.AngleAxis(-90, new Vector3(1, 0, 0));
-                m_targetRotation = Quaternion.AngleAxis(-90, new Vector3(1, 0, 0));
-                m_postRotateAction = (gem) => { gem.Voxels.RotateX(); gem.UpdateMesh(); m_gem.UpdateSlicePreview(m_curCutAngle); return true; };
+                m_targetRotation = Quaternion.AngleAxis(-90, new Vector3(1, 0, 0)) * m_gem.transform.rotation;
+                TriggerRotation();
             }
 
             // Cutter rotation inputs
@@ -131,36 +119,21 @@ namespace GemCutting
             {
                 RotateCutAngle(0, -1);
             }
-
         }
 
-        // TODO: Turn into a coroutine?
-        private void ProcessRotation()
+        private void TriggerRotation()
         {
-            m_gem.transform.rotation = Quaternion.RotateTowards(m_gem.transform.rotation, m_targetRotation, 5f);
-
-            // If rotation is complete and we have a post-rotate action, execute it
-            if (Quaternion.Angle(m_gem.transform.rotation, m_targetRotation) < .001)
-            {
-                //m_gem.transform.rotation = m_targetRotation;
-                m_gem.transform.rotation = Quaternion.identity;
-                m_postRotateAction(m_gem);
-                m_postRotateAction = null;
-                // Clear rotation
-                m_targetRotation = Quaternion.identity;
-                m_inputEnabled = true;
-            }
+            // TODO: Figure out what new cutting plane position will be, tween it as well. Or just UpdateSlicePreview in OnComplete
+            m_gem.transform.DORotateQuaternion(m_targetRotation, .5f)
+                .OnStart(() => m_inputEnabled = false)
+                .OnComplete(() =>
+                {
+                    m_inputEnabled = true;
+                    m_gem.UpdateSlicePreview(m_curCutAngle);
+                })
+                .SetEase(Ease.Linear); 
         }
 
-        private void SliceGem()
-        {
-            Vector3Int planePos = m_gem.Voxels.GetCoordinateFurthestAlongAngle(m_curCutAngle);
-            m_gem.Voxels.ClearPointsBeyondPlane(planePos, m_curCutAngle);
-            m_gem.Voxels.Trim();
-            m_gem.UpdateMesh();
-            m_gem.UpdateSlicePreview(m_curCutAngle);
-        }
-    
         private void RotateCutAngle(int yaw, int pitch)
         {
             //
@@ -203,12 +176,10 @@ namespace GemCutting
                 {
                     // TODO: Instead of tilting down towards camera, tilt down towards the last side we were on. Feels better.
                     // Find slanted angle closest to -camera.forward and use that
-                    // TODO: Use LINQ comprehension
-                    IEnumerable<float> dots = 
-                        from value in ValidSlantedAngles select 
-                            Vector3.Dot(Camera.main!.transform.forward, value);
-                    float[] dotsArr = dots.ToArray();
-                    int minIndex = Array.IndexOf(dotsArr, dotsArr.Min());
+                    float[] dots = ValidSlantedAngles
+                        .Select(value => Vector3.Dot(Camera.main!.transform.forward, value))
+                        .ToArray();
+                    int minIndex = Array.IndexOf(dots, dots.Min());
                     m_curCutAngle = ValidSlantedAngles[minIndex];
                 }
             }

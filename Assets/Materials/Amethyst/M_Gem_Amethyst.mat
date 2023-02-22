@@ -125,7 +125,7 @@ Material:
     m_Colors:
     - _AlphaRange: {r: 1, g: 0.98, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 0}
-    - _CutPlaneNormal: {r: -0.57735026, g: 0.57735026, b: -0.57735026, a: 0}
+    - _CutPlaneNormal: {r: 0.70710677, g: 0.70710677, b: 0, a: 0}
     - _CutPlanePosition: {r: -3, g: -3, b: -3, a: 0}
     - _CutPlaneTint: {r: 0, g: 1, b: 0.07320952, a: 0.4980392}
     - _FogColor: {r: 0.745283, g: 0.1722588, b: 0.6607296, a: 0}

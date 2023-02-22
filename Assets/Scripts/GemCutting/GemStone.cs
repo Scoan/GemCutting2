@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using External.MeshWelder;
 using MarchingCubesProject;
@@ -19,6 +20,7 @@ namespace GemCutting
 
         [Header("Debugging")]
         [SerializeField] private bool m_showGizmoPlanes = true;
+        [SerializeField] private bool m_showVoxelValues;
         [Header("Generation Params")]
         [SerializeField] private List<Material> m_materials = new();
         [SerializeField] private GemTypes m_gemType = GemTypes.CUSTOM; //Override to create a gem from the catalog by default.
@@ -30,9 +32,7 @@ namespace GemCutting
         private readonly List<GameObject> m_meshes = new();
         // TODO: Use. Instance materials!
         //private List<Material> m_materialInstances = new();
-        public VoxelGrid Voxels => m_voxels;
 
-        // Necessary as members w/ getters or setters aren't exposed in editor :(
         public int Seed
         {
             set {
@@ -83,7 +83,6 @@ namespace GemCutting
             {
                 // Getting a type from a different assembly is fun. GemTypes needs to be in the same assembly as the types themselves.
                 // Provide the fully qualified name to get the type!
-                // TODO: Use assembly definition ya dink. This isn't necessary.
                 Type gemClass = Type.GetType(typeof(GemTypes).Namespace + "." + m_gemType);
                 if (gemClass != null)
                 {
@@ -101,8 +100,7 @@ namespace GemCutting
 
         // TODO: This hitches. Thread creation of new mesh, only destroy & show new mesh once done?
         // Alternatively, cache tris for each voxel and only regenerate those which have changed?
-        // TODO: Make private?
-        public void UpdateMesh()
+        private void UpdateMesh()
         {
             if (m_voxels == null)
             {
@@ -167,22 +165,57 @@ namespace GemCutting
                 go.GetComponent<MeshFilter>().mesh = mesh;
                 go.layer = gameObject.layer;
 
-                go.transform.localPosition = new Vector3(-(float)visualGrid.m_extents.x / 2.0f, -(float)visualGrid.m_extents.y / 2.0f, -(float)visualGrid.m_extents.z / 2.0f);
+                go.transform.localPosition = new Vector3(
+                    -(float)visualGrid.m_extents.x / 2.0f, 
+                    -(float)visualGrid.m_extents.y / 2.0f, 
+                    -(float)visualGrid.m_extents.z / 2.0f);
+                go.transform.localRotation = Quaternion.identity;
+                go.transform.localScale = Vector3.one;
                 m_meshes.Add(go);
             }
         }
 
-        public void UpdateSlicePreview(Vector3 planeNormal)
+        private Vector3 CoordToWorldPos(int x, int y, int z)
         {
-            Vector3Int planePos = m_voxels.GetCoordinateFurthestAlongAngle(planeNormal);
+            // We center the voxels on our transform, so we need to offset a given coord to get its world-space position
+            // Start from zero, easier than figuring out if we need to add or subtract
+            // .5,.5,.5 is b/c our cells are justified lower-left, we wanna treat center of cell as world position though
+            Vector3 localPos = -(new Vector3(Size.x / 2.0f, Size.y / 2.0f, Size.z / 2.0f)) 
+                   + (new Vector3(x, y, z)) + new Vector3(.5f,.5f,.5f);
+            Transform xform = transform;
+            return (Vector3)(xform.localToWorldMatrix * localPos) + xform.position;
+        }
+
+        public void Slice(Vector3 cutPlaneNormal)
+        {
+            Vector3 localCutNormal = Quaternion.Inverse(transform.rotation) * cutPlaneNormal;
+            Vector3Int planePos = m_voxels.GetCoordinateFurthestAlongNormal(localCutNormal);
+            m_voxels.ClearPointsBeyondPlane(planePos, localCutNormal);
+            UpdateMesh();
+            UpdateSlicePreview(cutPlaneNormal);
+        }
+        
+        public void UpdateSlicePreview(Vector3 cutPlaneNormal)
+        {
+            Vector3 localCutNormal = Quaternion.Inverse(transform.rotation) * cutPlaneNormal;
+            Vector3Int planePos = m_voxels.GetCoordinateFurthestAlongNormal(localCutNormal);
             Vector3 planeWorldPos = CoordToWorldPos(planePos.x, planePos.y, planePos.z);
             foreach (Material material in m_materials)
             {
                 material.SetVector(CutPlanePositionProperty, new Vector4(planeWorldPos.x, planeWorldPos.y, planeWorldPos.z, 0));
-                material.SetVector(CutPlaneNormalProperty, new Vector4(planeNormal.x, planeNormal.y, planeNormal.z, 0));
+                material.SetVector(CutPlaneNormalProperty, new Vector4(cutPlaneNormal.x, cutPlaneNormal.y, cutPlaneNormal.z, 0));
             }
         }
 
+        #region Editor GUI
+        public void OnGUI()
+        {
+            if (m_showVoxelValues && m_voxels != null)
+            {
+                DebugVoxelValues();
+            }
+        }
+        
         private void OnDrawGizmos()
         {
             // Editor view that shows extents of gem, with optional slices into voxels
@@ -236,13 +269,38 @@ namespace GemCutting
             }
         }
 
-        public Vector3 CoordToWorldPos(int x, int y, int z)
+        private void DebugVoxelValues()
         {
-            // We center the voxels on our transform, so we need to offset a given coord to get its world-space position
-            // Start from zero, easier than figuring out if we need to add or subtract
-            // .5,.5,.5 is b/c our cells are justified lower-left, we wanna treat center of cell as world position though
-            return transform.position - (new Vector3(Size.x / 2.0f, Size.y / 2.0f, Size.z / 2.0f)) 
-                   + (new Vector3(x, y, z)) + new Vector3(.5f,.5f,.5f);
+            if (Camera.main is not {} cam)
+            {
+                return;
+            }
+                
+            GUIStyle positiveStyle = new()
+            {
+                normal =
+                {
+                    textColor = Color.green
+                }
+            };
+            GUIStyle negativeStyle = new()
+            {
+                normal =
+                {
+                    textColor = Color.red
+                }
+            };
+
+            for (int idx = 0; idx < m_voxels.m_values.Length; idx++)
+            {
+                float val = m_voxels.m_values[idx];
+                Vector3Int coords = m_voxels.IdxToCoord(idx);
+                Vector3 pos = cam.WorldToScreenPoint(CoordToWorldPos(coords.x, coords.y, coords.z));
+                GUI.Label(new Rect(pos.x, Screen.height-pos.y, 150, 130), 
+                    val.ToString(CultureInfo.InvariantCulture),
+                    val > 0 ? positiveStyle : negativeStyle);   
+            }
         }
+        #endregion
     }
 }

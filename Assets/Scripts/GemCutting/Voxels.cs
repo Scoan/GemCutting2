@@ -20,7 +20,7 @@ namespace GemCutting
             m_values = Enumerable.Repeat(m_defaultValue, m_extents.x * m_extents.y * m_extents.z).ToArray();
         }
 
-        private int CoordToIdx(Vector3Int coord)
+        public int CoordToIdx(Vector3Int coord)
         {
             // Converts a given (x,y,z) coordinate in the voxel grid to an index.
             // Catch out-of-range errors, return an invalid index.
@@ -35,7 +35,7 @@ namespace GemCutting
             return coord.x + coord.y * m_extents.x + coord.z * m_extents.x * m_extents.y;
         }
 
-        private Vector3Int IdxToCoord(int idx)
+        public Vector3Int IdxToCoord(int idx)
         {
             // Converts a given index to (x,y,z) coordinates in the voxel grid.
             // TODO: Catch out-of-range errors
@@ -545,7 +545,7 @@ namespace GemCutting
             return closestCoord;
         }
 
-        public Vector3Int GetCoordinateFurthestAlongAngle(Vector3 planeNormal)
+        public Vector3Int GetCoordinateFurthestAlongNormal(Vector3 planeNormal)
         {
             // Returns the furthest coordinate with an interesting value from a plane cutting through the center of the voxel grid.
             float furthestDist = Mathf.NegativeInfinity;
