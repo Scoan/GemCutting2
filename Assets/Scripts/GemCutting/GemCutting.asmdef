@@ -1,0 +1,18 @@
+{
+    "name": "GemCutting",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d3f21c3d361e1444e9ddf34fcb6ea791",
+        "GUID:be62b440db7c845429d0f06f34ce021c",
+        "GUID:db8e51fb5f4578c449d1159e15970c13"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

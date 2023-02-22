@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
-using Voxels;
+using GemCutting;
 
 namespace GemStoneCatalog
 {
@@ -35,7 +35,7 @@ namespace GemStoneCatalog
 
     // TODO: Make sure extents are updated!
 
-    public class AidennMask : Voxels.VoxelGrid
+    public class AidennMask : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(7, 3, 1);
         public static float[] __voxels = new float[] {-1, 1,  1, 1,  1, 1, -1,
@@ -48,7 +48,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Amanti : Voxels.VoxelGrid
+    public class Amanti : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 3);
         public static float[] __voxels = new float[] {-1, 1,-1,
@@ -69,7 +69,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Amunet : Voxels.VoxelGrid
+    public class Amunet : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 5, 6);
         public static float[] __voxels = new float[] {-1,-1,-1,-1,-1,
@@ -114,7 +114,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Appolonia : Voxels.VoxelGrid
+    public class Appolonia : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 6, 1);
         public static float[] __voxels = new float[] {-1, 1, -1, 1, -1,
@@ -131,7 +131,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Bastet : Voxels.VoxelGrid
+    public class Bastet : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 5, 1);
         public static float[] __voxels = new float[] {1,-1, 1,
@@ -147,7 +147,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Bridge : Voxels.VoxelGrid
+    public class Bridge : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(6, 3, 1);
         public static float[] __voxels = new float[] {1, 1, 1, 1, 1, 1,
@@ -161,7 +161,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class CatsEye : Voxels.VoxelGrid
+    public class CatsEye : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 5, 2);
         public static float[] __voxels = new float[] {-1, 1, 1, 1,-1,
@@ -182,7 +182,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Choronzon : Voxels.VoxelGrid
+    public class Choronzon : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 5, 3);
         public static float[] __voxels = new float[] {-1,-1, 1,-1,-1,
@@ -208,7 +208,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class CornerHeart : Voxels.VoxelGrid
+    public class CornerHeart : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(2, 2, 2);
         public static float[] __voxels = new float[] {1,-1,
@@ -223,7 +223,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Crater : Voxels.VoxelGrid
+    public class Crater : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 2);
         public static float[] __voxels = new float[] {1,-1, 1,
@@ -242,7 +242,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Dalessi : Voxels.VoxelGrid
+    public class Dalessi : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(4, 3, 4);
         public static float[] __voxels = new float[] {-1, 1,-1,-1,
@@ -267,7 +267,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class DragynsEye : Voxels.VoxelGrid
+    public class DragynsEye : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(4, 4, 4);
         public static float[] __voxels = new float[] {1, 1, 1, 1,
@@ -293,7 +293,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Eyelet : Voxels.VoxelGrid
+    public class Eyelet : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 2);
         public static float[] __voxels = new float[] {1, 1, 1,
@@ -311,7 +311,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class FullAidennMask : Voxels.VoxelGrid
+    public class FullAidennMask : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 3, 2);
         public static float[] __voxels = new float[] {1, 1, 1, 1, 1,
@@ -329,7 +329,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class FullEye : Voxels.VoxelGrid
+    public class FullEye : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 3);
         public static float[] __voxels = new float[] {1, 1, 1,
@@ -350,7 +350,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class HexasPlate : Voxels.VoxelGrid
+    public class HexasPlate : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 3);
         public static float[] __voxels = new float[] {-1, 1,-1,
@@ -374,7 +374,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class HilesChevrons : Voxels.VoxelGrid
+    public class HilesChevrons : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 5, 3);
         public static float[] __voxels = new float[] {-1, 1, 1,-1,-1,
@@ -405,7 +405,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class KhufusShip : Voxels.VoxelGrid
+    public class KhufusShip : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 5);
         public static float[] __voxels = new float[] {-1,-1,-1,
@@ -432,7 +432,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class KingsTomb : Voxels.VoxelGrid
+    public class KingsTomb : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(7, 7, 4);
         public static float[] __voxels = new float[] {-1,-1,-1, 1,-1,-1,-1,
@@ -475,7 +475,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Lens : Voxels.VoxelGrid
+    public class Lens : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(4, 4, 1);
         public static float[] __voxels = new float[] {-1, 1, 1,-1,
@@ -491,7 +491,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class LookingGlass : Voxels.VoxelGrid
+    public class LookingGlass : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(4, 6, 1);
         public static float[] __voxels = new float[] {1, 1, 1, 1,
@@ -509,7 +509,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Lotus : Voxels.VoxelGrid
+    public class Lotus : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 4, 3);
         public static float[] __voxels = new float[] {1,-1, 1,
@@ -535,7 +535,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class MoorishArch : Voxels.VoxelGrid
+    public class MoorishArch : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 5, 5);
         public static float[] __voxels = new float[] {-1,-1,-1,-1,-1,
@@ -573,7 +573,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class OsirisEye : Voxels.VoxelGrid
+    public class OsirisEye : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 3, 2);
         public static float[] __voxels = new float[] {-1, 1, 1, 1,-1,
@@ -590,7 +590,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Prism : Voxels.VoxelGrid
+    public class Prism : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 3);
         public static float[] __voxels = new float[] {-1,-1, 1,
@@ -611,7 +611,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class QueensTomb : Voxels.VoxelGrid
+    public class QueensTomb : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 5, 3);
         public static float[] __voxels = new float[] {-1,-1, 1,-1,-1,
@@ -639,7 +639,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class RasLantern : Voxels.VoxelGrid
+    public class RasLantern : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 6, 3);
         public static float[] __voxels = new float[] {-1,-1,-1,
@@ -669,7 +669,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Reflection : Voxels.VoxelGrid
+    public class Reflection : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 2);
         public static float[] __voxels = new float[] {1, 1, 1,
@@ -687,7 +687,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Refractor : Voxels.VoxelGrid
+    public class Refractor : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(4, 3, 3);
         public static float[] __voxels = new float[] {1,-1,-1,-1,
@@ -711,7 +711,7 @@ namespace GemStoneCatalog
     }
 
     // Underside of ring looks slightly different. WHY???
-    public class Ring : Voxels.VoxelGrid
+    public class Ring : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 3, 3);
         public static float[] __voxels = new float[] {-1, 1, 1, 1,-1,
@@ -732,7 +732,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class ShenOfHorus : Voxels.VoxelGrid
+    public class ShenOfHorus : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(6, 5, 3);
         public static float[] __voxels = new float[] {-1,-1,-1,-1,-1,-1,
@@ -759,7 +759,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Solarkin : Voxels.VoxelGrid
+    public class Solarkin : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(7, 4, 2);
         public static float[] __voxels = new float[] {-1,-1, 1, 1, 1,-1,-1,
@@ -778,7 +778,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Sprocket : Voxels.VoxelGrid
+    public class Sprocket : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(4, 4, 4);
         public static float[] __voxels = new float[] {-1,-1,-1,-1,
@@ -808,7 +808,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Suspension : Voxels.VoxelGrid
+    public class Suspension : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 3);
         public static float[] __voxels = new float[] {1,-1,-1,
@@ -828,7 +828,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Symmetry : Voxels.VoxelGrid
+    public class Symmetry : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 3);
         public static float[] __voxels = new float[] {-1, 1, -1,
@@ -850,7 +850,7 @@ namespace GemStoneCatalog
     }
 
     //TODO: Weird asymmetry at front. WHY???
-    public class TheFox : Voxels.VoxelGrid
+    public class TheFox : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 4, 4);
         public static float[] __voxels = new float[] {-1,-1,-1,
@@ -880,7 +880,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class TheShark : Voxels.VoxelGrid
+    public class TheShark : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 3);
         public static float[] __voxels = new float[] {-1,-1, 1,
@@ -901,7 +901,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Thistle : Voxels.VoxelGrid
+    public class Thistle : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 4, 3);
         public static float[] __voxels = new float[] {-1,-1,-1,
@@ -926,7 +926,7 @@ namespace GemStoneCatalog
     }
 
     // TODO: Weird asymmetry around holes. WHY???
-    public class ThothsKnot : Voxels.VoxelGrid
+    public class ThothsKnot : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 4, 3);
         public static float[] __voxels = new float[] {-1, 1,-1,
@@ -951,7 +951,7 @@ namespace GemStoneCatalog
     }
 
     // Nose and eyes are wrong. Top of mouth is wrong. WHY???
-    public class TikiMask : Voxels.VoxelGrid
+    public class TikiMask : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 7, 3);
         public static float[] __voxels = new float[] {-1,-1,-1,-1,-1,
@@ -985,7 +985,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Tombstone : Voxels.VoxelGrid
+    public class Tombstone : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(7, 6, 1);
         public static float[] __voxels = new float[] {-1,-1, 1, 1, 1,-1,-1,
@@ -1002,7 +1002,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Triclops : Voxels.VoxelGrid
+    public class Triclops : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(7, 3, 1);
         public static float[] __voxels = new float[] {-1, 1, 1, 1, 1, 1,-1,
@@ -1016,7 +1016,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class Unity : Voxels.VoxelGrid
+    public class Unity : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 5, 3);
         public static float[] __voxels = new float[] {-1,-1, 1,-1,-1,
@@ -1043,7 +1043,7 @@ namespace GemStoneCatalog
         }
     }
 
-    public class TEST_GEM : Voxels.VoxelGrid
+    public class TEST_GEM : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 4, 4);
         public static float[] __voxels = new float[] { -1, -1,  1, -1, -1,

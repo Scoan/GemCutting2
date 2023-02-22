@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using GemCutting;
 using UnityEngine;
 using GemStoneCatalog;
-using Voxels;
 using UnityEngine.UI;
 
 public class CatalogPanel : MonoBehaviour {

@@ -1,9 +1,9 @@
 ﻿using System;
-using UnityEngine;
 using System.Linq;
 using ProceduralNoiseProject;
+using UnityEngine;
 
-namespace Voxels
+namespace GemCutting
 {
     public class VoxelGrid
     {

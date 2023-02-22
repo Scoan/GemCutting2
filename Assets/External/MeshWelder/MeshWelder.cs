@@ -12,7 +12,7 @@ using UnityEngine;
 	http://answers.unity3d.com/questions/1382854/welding-vertices-at-runtime.html
 */
 
-namespace External
+namespace External.MeshWelder
 {
     [Flags]
     public enum EVertexAttribute
