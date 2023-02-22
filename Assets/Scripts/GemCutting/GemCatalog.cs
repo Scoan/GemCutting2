@@ -1,40 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using JetBrains.Annotations;
 using UnityEngine;
-using System.Linq;
-using System;
-using GemCutting;
 
-namespace GemStoneCatalog
+namespace GemCutting
 {
     /// <summary>
     ///  Catalog'd Gems
     /// </summary>
     /// 
 
-    //public class GemPreset
-    //{
-    //    private static Vector3Int __extents;
-    //    private static float[] __voxels = new float[] { };
-    //
-    //    public static VoxelGrid VoxelsFromPreset()
-    //    {
-    //        VoxelGrid grid = new VoxelGrid(__extents);
-    //        grid.values = __voxels;
-    //        return grid;
-    //    }
-    //}
-
-    //public class AidennMask_ : GemPreset
-    //{
-    //    private static Vector3Int __extents = new Vector3Int(7, 3, 1);
-    //    private static float[] __voxels = new float[] {-1, 1,  1, 1,  1, 1, -1,
-    //                                                    1, 1, -1, 1, -1, 1,  1,
-    //                                                   -1, 1,  1, 1,  1, 1, -1};
-    //}
-
-    // TODO: Make sure extents are updated!
-
+    // TODO: Make sure extents are updated when a preset is applied?
+    
+    [UsedImplicitly]
     public class AidennMask : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(7, 3, 1);
@@ -48,6 +24,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Amanti : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 3);
@@ -69,6 +46,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Amunet : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 5, 6);
@@ -114,6 +92,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Appolonia : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 6, 1);
@@ -131,6 +110,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Bastet : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 5, 1);
@@ -147,6 +127,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Bridge : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(6, 3, 1);
@@ -161,6 +142,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class CatsEye : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 5, 2);
@@ -182,6 +164,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Choronzon : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 5, 3);
@@ -208,6 +191,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class CornerHeart : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(2, 2, 2);
@@ -223,6 +207,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Crater : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 2);
@@ -242,6 +227,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Dalessi : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(4, 3, 4);
@@ -267,6 +253,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class DragynsEye : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(4, 4, 4);
@@ -293,6 +280,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Eyelet : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 2);
@@ -311,6 +299,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class FullAidennMask : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 3, 2);
@@ -329,6 +318,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class FullEye : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 3);
@@ -350,6 +340,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class HexasPlate : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 3);
@@ -374,6 +365,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class HilesChevrons : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 5, 3);
@@ -405,6 +397,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class KhufusShip : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 5);
@@ -432,6 +425,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class KingsTomb : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(7, 7, 4);
@@ -475,6 +469,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Lens : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(4, 4, 1);
@@ -491,6 +486,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class LookingGlass : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(4, 6, 1);
@@ -509,6 +505,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Lotus : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 4, 3);
@@ -535,6 +532,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class MoorishArch : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 5, 5);
@@ -573,6 +571,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class OsirisEye : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 3, 2);
@@ -590,6 +589,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Prism : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 3);
@@ -611,6 +611,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class QueensTomb : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 5, 3);
@@ -639,6 +640,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class RasLantern : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 6, 3);
@@ -669,6 +671,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Reflection : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 2);
@@ -687,6 +690,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Refractor : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(4, 3, 3);
@@ -710,7 +714,8 @@ namespace GemStoneCatalog
         }
     }
 
-    // Underside of ring looks slightly different. WHY???
+    // TODO: Underside of ring looks slightly different. WHY???
+    [UsedImplicitly]
     public class Ring : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 3, 3);
@@ -732,6 +737,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class ShenOfHorus : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(6, 5, 3);
@@ -759,6 +765,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Solarkin : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(7, 4, 2);
@@ -778,6 +785,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Sprocket : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(4, 4, 4);
@@ -808,6 +816,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Suspension : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 3);
@@ -828,6 +837,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Symmetry : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 3);
@@ -850,6 +860,7 @@ namespace GemStoneCatalog
     }
 
     //TODO: Weird asymmetry at front. WHY???
+    [UsedImplicitly]
     public class TheFox : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 4, 4);
@@ -880,6 +891,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class TheShark : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 3, 3);
@@ -901,6 +913,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Thistle : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 4, 3);
@@ -926,6 +939,7 @@ namespace GemStoneCatalog
     }
 
     // TODO: Weird asymmetry around holes. WHY???
+    [UsedImplicitly]
     public class ThothsKnot : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(3, 4, 3);
@@ -950,7 +964,8 @@ namespace GemStoneCatalog
         }
     }
 
-    // Nose and eyes are wrong. Top of mouth is wrong. WHY???
+    // TODO: Nose and eyes are wrong. Top of mouth is wrong. WHY???
+    [UsedImplicitly]
     public class TikiMask : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 7, 3);
@@ -985,6 +1000,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Tombstone : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(7, 6, 1);
@@ -1002,6 +1018,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Triclops : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(7, 3, 1);
@@ -1016,6 +1033,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class Unity : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 5, 3);
@@ -1043,6 +1061,7 @@ namespace GemStoneCatalog
         }
     }
 
+    [UsedImplicitly]
     public class TEST_GEM : VoxelGrid
     {
         private static Vector3Int __extents = new Vector3Int(5, 4, 4);
@@ -1072,7 +1091,8 @@ namespace GemStoneCatalog
             Mirror(false, true, false);
         }
     }
-
+    
+    // ReSharper disable once InconsistentNaming
     public enum GemTypes {  CUSTOM,
                             AidennMask,
                             Amanti,
@@ -1117,5 +1137,4 @@ namespace GemStoneCatalog
                             Tombstone,
                             Triclops,
                             Unity};
-
 }

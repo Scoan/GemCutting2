@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using External.MeshWelder;
-using GemStoneCatalog;
 using MarchingCubesProject;
 using UnityEditor;
 using UnityEngine;

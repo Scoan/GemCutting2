@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using GemCutting;
 using UnityEngine;
-using GemStoneCatalog;
 using UnityEngine.UI;
 
 public class CatalogPanel : MonoBehaviour {

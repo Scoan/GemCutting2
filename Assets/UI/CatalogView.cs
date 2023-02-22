@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using GemCutting;
 using UnityEngine;
-using GemStoneCatalog;
 
 public class CatalogView : MonoBehaviour
 {
