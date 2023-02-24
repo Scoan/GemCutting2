@@ -20,6 +20,21 @@ namespace GemCutting
             m_values = Enumerable.Repeat(m_defaultValue, m_extents.x * m_extents.y * m_extents.z).ToArray();
         }
 
+        public VoxelGrid Copy()
+        {
+            VoxelGrid copy = new(m_extents, m_defaultValue)
+            {
+                m_values = m_values
+            };
+            return copy;
+        }
+        
+        public bool Equals(VoxelGrid other)
+        {
+            return (m_values.Length == other.m_values.Length) 
+                   && !m_values.Where((t, idx) => Math.Abs(t - other.m_values[idx]) > TOLERANCE).Any();
+        }
+
         public int CoordToIdx(Vector3Int coord)
         {
             // Converts a given (x,y,z) coordinate in the voxel grid to an index.

@@ -207,6 +207,54 @@ namespace GemCutting
             }
         }
 
+        public bool Compare(GemStone other)
+        {
+            // Does this gem, in any orientation, match the provided gem?
+            // 6 * 4 orientations to check (4 orientations of 6 faces)
+            
+            VoxelGrid thisCopy = m_voxels.Copy();
+            thisCopy.Trim();
+            VoxelGrid otherCopy = other.m_voxels.Copy();
+            otherCopy.Trim();
+
+            // Loop around the voxel grid, covering 4 faces
+            for (int yIdx = 0; yIdx < 4; yIdx++)
+            {
+                // 4 orientations of one face of the voxel grid
+                for (int xIdx = 0; xIdx < 4; xIdx++)
+                {
+                    if (thisCopy.Equals(otherCopy))
+                    {
+                        return true;
+                    }
+                    otherCopy.RotateX();
+                }
+                otherCopy.RotateY();
+            }
+            // Cover the last two faces
+            otherCopy.RotateZ();
+            for (int xIdx = 0; xIdx < 4; xIdx++)
+            {
+                if (thisCopy.Equals(otherCopy))
+                {
+                    return true;
+                }
+                otherCopy.RotateX();
+            }
+            otherCopy.RotateZ();
+            otherCopy.RotateZ();
+            for (int xIdx = 0; xIdx < 4; xIdx++)
+            {
+                if (thisCopy.Equals(otherCopy))
+                {
+                    return true;
+                }
+                otherCopy.RotateX();
+            }
+
+            return false;
+        }
+
         #region Editor GUI
         public void OnGUI()
         {

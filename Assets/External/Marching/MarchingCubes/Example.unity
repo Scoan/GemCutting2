@@ -1846,6 +1846,11 @@ PrefabInstance:
       propertyPath: m_gem
       value: 
       objectReference: {fileID: 2059078857}
+    - target: {fileID: 114560483081928644, guid: 735efba0d34bef5408c893bf062048c5,
+        type: 3}
+      propertyPath: m_catalogGem
+      value: 
+      objectReference: {fileID: 1050961129}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 735efba0d34bef5408c893bf062048c5, type: 3}
 --- !u!1 &1050961128
@@ -1881,7 +1886,7 @@ MonoBehaviour:
   m_showVoxelValues: 0
   m_materials:
   - {fileID: 2100000, guid: e48f6822a755c0343a3d72fc26837b0c, type: 2}
-  m_gemType: 0
+  m_gemType: 20
   m_size: {x: 7, y: 7, z: 7}
   m_seed: 0
   m_purityBias: 0.15

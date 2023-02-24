@@ -28,6 +28,7 @@ namespace GemCutting
             (Vector3.back + Vector3.left + Vector3.up    ).normalized};
 
         [SerializeField] private GemStone m_gem;
+        [SerializeField] private GemStone m_catalogGem;
 
         // Is input currently allowed? We disable it during a rotation
         private bool m_inputEnabled = true;
@@ -118,6 +119,37 @@ namespace GemCutting
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 RotateCutAngle(0, -1);
+            }
+            
+            else if (Input.GetKeyDown(KeyCode.P))
+            {
+                Debug.LogWarning(m_gem.Compare(m_catalogGem));
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftBracket))
+            {
+                PreviousCatalogGem();
+            }
+            else if (Input.GetKeyDown(KeyCode.RightBracket))
+            {
+                NextCatalogGem();
+            }
+        }
+
+        // TODO: Move these to general controls
+        private void PreviousCatalogGem()
+        {
+            if (m_catalogGem)
+            {
+                int numOptions = Enum.GetValues(typeof(GemTypes)).Length;
+                m_catalogGem.GemType = (GemTypes)((int)(m_catalogGem.GemType - 1 + numOptions) % numOptions);
+            }
+        }
+        private void NextCatalogGem()
+        {
+            if (m_catalogGem)
+            {
+                int numOptions = Enum.GetValues(typeof(GemTypes)).Length;
+                m_catalogGem.GemType = (GemTypes)((int)(m_catalogGem.GemType + 1 + numOptions) % numOptions);
             }
         }
 
