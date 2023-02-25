@@ -7,6 +7,7 @@ using MarchingCubesProject;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
+using Random = UnityEngine.Random;
 
 namespace GemCutting
 {
@@ -17,6 +18,7 @@ namespace GemCutting
     
         private static readonly int CutPlanePositionProperty = Shader.PropertyToID("_CutPlanePosition");
         private static readonly int CutPlaneNormalProperty = Shader.PropertyToID("_CutPlaneNormal");
+        private static readonly int UVOffsetProperty = Shader.PropertyToID("_UVOffset");
 
         [Header("Debugging")]
         [SerializeField] private bool m_showGizmoPlanes = true;
@@ -32,6 +34,9 @@ namespace GemCutting
         private readonly List<GameObject> m_meshes = new();
         // TODO: Use. Instance materials!
         //private List<Material> m_materialInstances = new();
+        
+        // Seed-dependent material properties
+        private Vector4 m_uvOffset = new();
 
         public int Seed
         {
@@ -39,6 +44,7 @@ namespace GemCutting
                 if (m_seed != value)
                 {
                     m_seed = value;
+                    GenerateRandomMaterialValues();
                     // When seed changes, regen voxels and mesh
                     if (m_voxels != null)
                     {
@@ -71,6 +77,14 @@ namespace GemCutting
 
         void Awake () {
             GenerateVoxelsAndMesh();
+        }
+
+        private void GenerateRandomMaterialValues()
+        {
+            UnityEngine.Random.State oldState = UnityEngine.Random.state;
+            UnityEngine.Random.InitState(Seed);
+            m_uvOffset = new Vector4(Random.value, Random.value, Random.value, Random.value);
+            UnityEngine.Random.state = oldState;
         }
 
         private void GenerateVoxelsAndMesh() {
@@ -204,6 +218,7 @@ namespace GemCutting
             {
                 material.SetVector(CutPlanePositionProperty, new Vector4(planeWorldPos.x, planeWorldPos.y, planeWorldPos.z, 0));
                 material.SetVector(CutPlaneNormalProperty, new Vector4(cutPlaneNormal.x, cutPlaneNormal.y, cutPlaneNormal.z, 0));
+                material.SetVector(UVOffsetProperty, m_uvOffset);
             }
         }
 

@@ -2,6 +2,7 @@
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
+using Random = System.Random;
 
 namespace GemCutting
 {
@@ -121,6 +122,10 @@ namespace GemCutting
                 RotateCutAngle(0, -1);
             }
             
+            else if (Input.GetKeyDown(KeyCode.O))
+            {
+                GenerateRandomGem();
+            }
             else if (Input.GetKeyDown(KeyCode.P))
             {
                 Debug.LogWarning(m_gem.Compare(m_catalogGem));
@@ -136,6 +141,15 @@ namespace GemCutting
         }
 
         // TODO: Move these to general controls
+        private void GenerateRandomGem()
+        {
+            if (m_gem)
+            {
+                m_gem.Seed = UnityEngine.Random.Range(0, 1000000);
+                m_gem.GemType = GemTypes.CUSTOM;
+            }
+        }
+        
         private void PreviousCatalogGem()
         {
             if (m_catalogGem)
