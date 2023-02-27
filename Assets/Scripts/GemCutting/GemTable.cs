@@ -7,7 +7,8 @@ namespace GemCutting
 {
     public class GemTable : MonoBehaviour {
     
-        private static readonly Vector3[] ValidHorizontalAngles = { 
+        public static readonly Vector3[] cuttingPlaneHorizontalNormals = 
+        { 
             Vector3.left,
             (Vector3.left + Vector3.forward).normalized,
             Vector3.forward,
@@ -15,9 +16,11 @@ namespace GemCutting
             Vector3.right,
             (Vector3.right + Vector3.back).normalized,
             Vector3.back,
-            (Vector3.back + Vector3.left).normalized};
-
-        private static readonly Vector3[] ValidSlantedAngles = {   
+            (Vector3.back + Vector3.left).normalized,
+        };
+        
+        public static readonly Vector3[] cuttingPlaneSlantedNormals = 
+        {   
             (Vector3.left + Vector3.up                   ).normalized,
             (Vector3.left + Vector3.forward + Vector3.up ).normalized,
             (Vector3.forward + Vector3.up                ).normalized,
@@ -25,7 +28,23 @@ namespace GemCutting
             (Vector3.right + Vector3.up                  ).normalized,
             (Vector3.right + Vector3.back + Vector3.up   ).normalized,
             (Vector3.back + Vector3.up                   ).normalized,
-            (Vector3.back + Vector3.left + Vector3.up    ).normalized};
+            (Vector3.back + Vector3.left + Vector3.up    ).normalized,
+        };
+
+        // In addition to the cutting angles above, these angles should be used when validating a loaded gem
+        public static readonly Vector3[] validationAdditionalAngles =
+        {
+            Vector3.up,
+            Vector3.down,
+            (Vector3.left + Vector3.down                   ).normalized,
+            (Vector3.left + Vector3.forward + Vector3.down ).normalized,
+            (Vector3.forward + Vector3.down                ).normalized,
+            (Vector3.forward + Vector3.right + Vector3.down).normalized,
+            (Vector3.right + Vector3.down                  ).normalized,
+            (Vector3.right + Vector3.back + Vector3.down   ).normalized,
+            (Vector3.back + Vector3.down                   ).normalized,
+            (Vector3.back + Vector3.left + Vector3.down    ).normalized,
+        };
 
         [SerializeField] private GemStone m_gem;
         [SerializeField] private GemStone m_catalogGem;
@@ -130,13 +149,19 @@ namespace GemCutting
             {
                 NextCatalogGem();
             }
-            else if (Input.GetKeyDown(KeyCode.L))
-            {
-                // TODO: Copy gem to clipboard
-            }
             else if (Input.GetKeyDown(KeyCode.K))
             {
-                // TODO: Paste gem from clipboard
+                if (m_gem)
+                {
+                    m_gem.Save();
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.L))
+            {
+                if (m_gem)
+                {
+                    m_gem.Load();
+                }
             }
         }
 
@@ -174,7 +199,6 @@ namespace GemCutting
 
         private void TriggerRotation()
         {
-            // TODO: Figure out what new cutting plane position will be, tween it as well. Or just UpdateSlicePreview in OnComplete
             m_gem.transform.DORotateQuaternion(m_targetRotation, .5f)
                 .OnStart(() => m_inputEnabled = false)
                 .OnComplete(() =>
@@ -188,34 +212,34 @@ namespace GemCutting
         private void RotateCutAngle(int yaw, int pitch)
         {
             //
-            int horizAngleIndex = Array.IndexOf(ValidHorizontalAngles, m_curCutAngle);
-            int slantedAngleIndex = Array.IndexOf(ValidSlantedAngles, m_curCutAngle);
+            int horizAngleIndex = Array.IndexOf(cuttingPlaneHorizontalNormals, m_curCutAngle);
+            int slantedAngleIndex = Array.IndexOf(cuttingPlaneSlantedNormals, m_curCutAngle);
             if (yaw != 0)
             {
                 if (horizAngleIndex != -1)
                 {
-                    int newIndex = (horizAngleIndex + (int)Mathf.Sign(yaw)) % ValidHorizontalAngles.Length;
-                    newIndex = (newIndex == -1) ? ValidHorizontalAngles.Length - 1 : newIndex;
-                    m_curCutAngle = ValidHorizontalAngles[newIndex];
+                    int newIndex = (horizAngleIndex + (int)Mathf.Sign(yaw)) % cuttingPlaneHorizontalNormals.Length;
+                    newIndex = (newIndex == -1) ? cuttingPlaneHorizontalNormals.Length - 1 : newIndex;
+                    m_curCutAngle = cuttingPlaneHorizontalNormals[newIndex];
                 }
                 else if (slantedAngleIndex != -1)
                 {
-                    int newIndex = (slantedAngleIndex + (int)Mathf.Sign(yaw)) % ValidSlantedAngles.Length;
-                    newIndex = (newIndex == -1) ? ValidSlantedAngles.Length - 1 : newIndex;
-                    m_curCutAngle = ValidSlantedAngles[newIndex];
+                    int newIndex = (slantedAngleIndex + (int)Mathf.Sign(yaw)) % cuttingPlaneSlantedNormals.Length;
+                    newIndex = (newIndex == -1) ? cuttingPlaneSlantedNormals.Length - 1 : newIndex;
+                    m_curCutAngle = cuttingPlaneSlantedNormals[newIndex];
                 }
             }
             else if (pitch != 0)
             {
                 if (horizAngleIndex != -1 && pitch == 1)
                 {
-                    m_curCutAngle = ValidSlantedAngles[horizAngleIndex];
+                    m_curCutAngle = cuttingPlaneSlantedNormals[horizAngleIndex];
                 }
                 else if (slantedAngleIndex != -1)
                 {
                     if (pitch == -1)
                     {
-                        m_curCutAngle = ValidHorizontalAngles[slantedAngleIndex];
+                        m_curCutAngle = cuttingPlaneHorizontalNormals[slantedAngleIndex];
                     }
                     else if (pitch == 1)
                     {
@@ -227,11 +251,11 @@ namespace GemCutting
                 {
                     // TODO: Instead of tilting down towards camera, tilt down towards the last side we were on. Feels better.
                     // Find slanted angle closest to -camera.forward and use that
-                    float[] dots = ValidSlantedAngles
+                    float[] dots = cuttingPlaneSlantedNormals
                         .Select(value => Vector3.Dot(Camera.main!.transform.forward, value))
                         .ToArray();
                     int minIndex = Array.IndexOf(dots, dots.Min());
-                    m_curCutAngle = ValidSlantedAngles[minIndex];
+                    m_curCutAngle = cuttingPlaneSlantedNormals[minIndex];
                 }
             }
             // Update slice preview

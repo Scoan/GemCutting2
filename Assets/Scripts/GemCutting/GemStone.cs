@@ -19,7 +19,7 @@ namespace GemCutting
         [SerializeField] private int m_seed;
         [SerializeField] private float m_purityBias;
         [SerializeField] private VoxelGrid m_voxels;
-        // TODO: When loading from json, set this
+        
         [NonSerialized] private bool m_valid;
 
         public List<Material> Materials => m_materials;
@@ -31,7 +31,7 @@ namespace GemCutting
 
         public GemStoneSerialization(GemStone gemstone)
         {
-            // TODO: serialize materials by guid?
+            // TODO: serialize base materials by guid?
             m_materials = gemstone.BaseMaterials;
             m_size = gemstone.Size;
             m_seed = gemstone.Seed;
@@ -46,9 +46,56 @@ namespace GemCutting
 
         public static GemStoneSerialization FromJson(string json)
         {
+            // TODO: Handle parse errors. GemStoneSerialization as out argument?
             GemStoneSerialization deserialized = JsonUtility.FromJson<GemStoneSerialization>(json);
-            // TODO: Validate incoming json? I.E given voxels are possible with the given seed
+            
+            // Validate incoming json
             deserialized.m_valid = true;
+            
+            // Validation isn't trivial (possible to cheat by manually adding removed voxels back in,
+            // but leave removed interior voxels, and voxels that were never filled in the first place, empty)
+            VoxelGrid validationVoxels = new(deserialized.m_size);
+            validationVoxels.GenerateFromSeed(deserialized.m_seed, true, deserialized.m_purityBias);
+            // Get the convex hull of the serialized voxel grid's positive values.
+            // Within this hull, the serialized grid should match the validation grid exactly.
+            // Outside of the hull, the serialized grid should be empty.
+            // This indicates the serialized grid could conceivably have been cut from the validation grid.
+            VoxelGrid convexHullVoxels = new(deserialized.m_size, 1.0f);
+            IEnumerable<Vector3> validationNormals = new List<Vector3>()
+                .Concat(GemTable.cuttingPlaneHorizontalNormals)
+                .Concat(GemTable.cuttingPlaneSlantedNormals)
+                .Concat(GemTable.validationAdditionalAngles);
+            foreach (Vector3 planeNormal in validationNormals)
+            {
+                Vector3 planePosition = deserialized.m_voxels.GetCoordinateFurthestAlongNormal(planeNormal);
+                convexHullVoxels.SetValuesAtAndBeyondPlane(
+                    planePosition + (planeNormal * (VoxelGrid.Tolerance * 2)), // Nudge plane to ensure shell of hull is considered
+                    planeNormal, 
+                    0.0f);
+            }
+            // At this point, interestingVoxels should have values of 1 inside the convex hull and 0 outside
+            for (int idx = 0; idx < convexHullVoxels.m_values.Length; idx++)
+            {
+                // Inside convex hull; values must match exactly
+                if (Math.Abs(convexHullVoxels.m_values[idx] - 1.0f) < VoxelGrid.Tolerance)
+                {
+                    if (Math.Abs(deserialized.m_voxels.m_values[idx] - validationVoxels.m_values[idx]) > VoxelGrid.Tolerance)
+                    {
+                        deserialized.m_valid = false;
+                        break;
+                    }
+                }
+                // Outside convex hull; serialized value must be a void!
+                else if (Math.Abs(convexHullVoxels.m_values[idx] - 0.0f) < VoxelGrid.Tolerance)
+                {
+                    if (Math.Abs(deserialized.m_voxels.m_values[idx] - validationVoxels.m_defaultValue) > VoxelGrid.Tolerance)
+                    {
+                        deserialized.m_valid = false;
+                        break;
+                    }
+                }
+            }
+            
             return deserialized;
         }
     }
@@ -110,11 +157,16 @@ namespace GemCutting
         {
             // TODO: Save to local file or copy to clipboard
             GemStoneSerialization serializationObject = new(this);
+            // TODO: Separate method
+            GUIUtility.systemCopyBuffer = serializationObject.ToJson();
             return serializationObject.ToJson();
         }
 
-        public bool Load(string json)
+        public bool Load()
         {
+            // TODO: From clipboard
+            string json = GUIUtility.systemCopyBuffer;
+            
             // TODO: Respect validity of serializationObject, log/present to player if invalid
             GemStoneSerialization serializationObject = GemStoneSerialization.FromJson(json);
             if (!serializationObject.Valid)
@@ -317,7 +369,7 @@ namespace GemCutting
         {
             Vector3 localCutNormal = Quaternion.Inverse(transform.rotation) * cutPlaneNormal;
             Vector3Int planePos = m_voxels.GetCoordinateFurthestAlongNormal(localCutNormal);
-            m_voxels.ClearPointsBeyondPlane(planePos, localCutNormal);
+            m_voxels.SetValuesAtAndBeyondPlane(planePos, localCutNormal, m_voxels.m_defaultValue);
             UpdateMeshes();
             UpdateSlicePreview(cutPlaneNormal);
         }

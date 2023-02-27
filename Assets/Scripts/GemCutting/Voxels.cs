@@ -8,11 +8,11 @@ namespace GemCutting
     [Serializable]
     public class VoxelGrid
     {
-        private static readonly float Tolerance = .001f;
+        public static readonly float Tolerance = .001f;
         
         public Vector3Int m_extents;
         public float[] m_values;
-        public readonly float m_defaultValue;  // Newly initialized voxels default to this value.
+        public float m_defaultValue;  // Newly initialized voxels default to this value.
 
         public VoxelGrid(Vector3Int extents, float defaultValue = -1)
         {
@@ -583,17 +583,17 @@ namespace GemCutting
             return furthestCoord;
         }
 
-        public void ClearPointsBeyondPlane(Vector3 planePos, Vector3 planeNormal)
+        public void SetValuesAtAndBeyondPlane(Vector3 planePos, Vector3 planeNormal, float value)
         {
             for (int idx = 0; idx < m_values.Length; idx++)
             {
                 // Don't process pts which are already clear
-                if (Math.Abs(m_values[idx] - m_defaultValue) < Tolerance)
+                if (Math.Abs(m_values[idx] - value) < Tolerance)
                     continue;
                 // Clear points w/ a positive or 0 distance from plane
-                if (MyMath.DistanceToPlane(IdxToCoord(idx), planePos, planeNormal) >= 0 - 1e-3)
+                if (MyMath.DistanceToPlane(IdxToCoord(idx), planePos, planeNormal) >= 0 - Tolerance)
                 {
-                    SetVal(idx, m_defaultValue);
+                    SetVal(idx, value);
                 }
             }
         }
