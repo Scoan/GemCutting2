@@ -11,11 +11,53 @@ using Random = UnityEngine.Random;
 
 namespace GemCutting
 {
+    [Serializable]
+    public class GemStoneSerialization
+    {
+        [SerializeField] private List<Material> m_materials;
+        [SerializeField] private Vector3Int m_size;
+        [SerializeField] private int m_seed;
+        [SerializeField] private float m_purityBias;
+        [SerializeField] private VoxelGrid m_voxels;
+        // TODO: When loading from json, set this
+        [NonSerialized] private bool m_valid;
+
+        public List<Material> Materials => m_materials;
+        public Vector3Int Size => m_size;
+        public int Seed => m_seed;
+        public float PurityBias => m_purityBias;
+        public VoxelGrid Voxels => m_voxels;
+        public bool Valid => m_valid;
+
+        public GemStoneSerialization(GemStone gemstone)
+        {
+            // TODO: serialize materials by guid?
+            m_materials = gemstone.BaseMaterials;
+            m_size = gemstone.Size;
+            m_seed = gemstone.Seed;
+            m_purityBias = gemstone.PurityBias;
+            m_voxels = gemstone.Voxels;
+        }
+
+        public string ToJson()
+        {
+            return JsonUtility.ToJson(this);
+        }
+
+        public static GemStoneSerialization FromJson(string json)
+        {
+            GemStoneSerialization deserialized = JsonUtility.FromJson<GemStoneSerialization>(json);
+            // TODO: Validate incoming json? I.E given voxels are possible with the given seed
+            deserialized.m_valid = true;
+            return deserialized;
+        }
+    }
+    
     /// <summary>
     /// Class representing a voxel grid which can be visualized as a gemstone.
     /// </summary>
-    public class GemStone : MonoBehaviour {
-    
+    public class GemStone : MonoBehaviour 
+    {
         private static readonly int CutPlanePositionProperty = Shader.PropertyToID("_CutPlanePosition");
         private static readonly int CutPlaneNormalProperty = Shader.PropertyToID("_CutPlaneNormal");
         private static readonly int UVOffsetProperty = Shader.PropertyToID("_UVOffset");
@@ -23,98 +65,164 @@ namespace GemCutting
         [Header("Debugging")]
         [SerializeField] private bool m_showGizmoPlanes = true;
         [SerializeField] private bool m_showVoxelValues;
+        [SerializeField] private bool m_useMaterialInstances = true; // Handy to use materials directly for iteration
         [Header("Generation Params")]
         [SerializeField] private List<Material> m_materials = new();
-        [SerializeField] private GemTypes m_gemType = GemTypes.CUSTOM; //Override to create a gem from the catalog by default.
+        [SerializeField] private VoxelsSource m_voxelsSource = VoxelsSource.Custom;
+        [SerializeField] private GemCatalogType m_gemCatalogType = GemCatalogType.AidennMask;
         [SerializeField] private Vector3Int m_size = new(7, 7, 7);
         [SerializeField] private int m_seed;
         [SerializeField] private float m_purityBias = .05f;  // 0 = ~50% voids, 50% solids. Higher = fewer voids.
     
         private VoxelGrid m_voxels;
         private readonly List<GameObject> m_meshes = new();
-        // TODO: Use. Instance materials!
-        //private List<Material> m_materialInstances = new();
+        private readonly List<Material> m_materialInstances = new();
+        // Material properties derived from seed
+        private Vector4 m_uvOffset;
+
+        public List<Material> BaseMaterials => m_materials;
+        private List<Material> UsedMaterials => m_materialInstances.Any() ? m_materialInstances : m_materials;
+        public float PurityBias => m_purityBias;
+        public VoxelGrid Voxels => m_voxels;
         
-        // Seed-dependent material properties
-        private Vector4 m_uvOffset = new();
+        public Vector3Int Size => m_voxels?.m_extents ?? m_size;
 
         public int Seed
         {
-            set {
-                if (m_seed != value)
-                {
-                    m_seed = value;
-                    GenerateRandomMaterialValues();
-                    // When seed changes, regen voxels and mesh
-                    if (m_voxels != null)
-                    {
-                        GenerateVoxelsAndMesh();
-                    }
-                }
-            }
             get => m_seed;
+            set => m_seed = value;
         }
 
-        public Vector3Int Size
+        public VoxelsSource VoxelsSource
         {
-            set
-            {
-                m_size = value;
-                GenerateVoxelsAndMesh();
-            }
-            get => m_voxels?.m_extents ?? m_size;
+            get => m_voxelsSource;
+            set => m_voxelsSource = value;
         }
 
-        public GemTypes GemType
+        public GemCatalogType GemCatalogType
         {
-            get => m_gemType;
-            set
-            {
-                m_gemType = value;
-                GenerateVoxelsAndMesh();
-            }
+            get => m_gemCatalogType;
+            set => m_gemCatalogType = value;
         }
+        
+        #region Serialization
+        public string Save()
+        {
+            // TODO: Save to local file or copy to clipboard
+            GemStoneSerialization serializationObject = new(this);
+            return serializationObject.ToJson();
+        }
+
+        public bool Load(string json)
+        {
+            // TODO: Respect validity of serializationObject, log/present to player if invalid
+            GemStoneSerialization serializationObject = GemStoneSerialization.FromJson(json);
+            if (!serializationObject.Valid)
+            {
+                return false;
+            }
+            // Construct gem from serializationObject
+            m_voxelsSource = VoxelsSource.Custom; // It would be pretty silly to serialize other gem types.
+            m_materials = serializationObject.Materials;
+            m_size = serializationObject.Size;
+            m_seed = serializationObject.Seed;
+            m_purityBias = serializationObject.PurityBias;
+            m_voxels = serializationObject.Voxels;
+            
+            Initialize();
+
+            return true;
+        }
+        #endregion
 
         void Awake () {
-            GenerateVoxelsAndMesh();
+            Initialize();
+        }
+
+        public void Initialize()
+        {
+            GenerateRandomMaterialValues();
+            if (m_useMaterialInstances)
+            {
+                GenerateMaterialInstances();
+            }
+            UpdateVoxelsAndMesh();
+        }
+
+        private void GenerateMaterialInstances()
+        {
+            // Clear existing material instances
+            foreach (GameObject mesh in m_meshes)
+            {
+                mesh.GetComponent<Renderer>().material = null;
+            }
+            foreach (Material materialInstance in m_materialInstances)
+            {
+                Destroy(materialInstance);
+            }
+            m_materialInstances.Clear();
+            
+            // Create materials
+            foreach (Material material in m_materials)
+            {
+                Material materialInstance = new(material);
+                // Apply seed-based properties
+                materialInstance.SetVector(UVOffsetProperty, m_uvOffset);
+                
+                m_materialInstances.Add(materialInstance);
+            }
+            
         }
 
         private void GenerateRandomMaterialValues()
         {
-            UnityEngine.Random.State oldState = UnityEngine.Random.state;
-            UnityEngine.Random.InitState(Seed);
-            m_uvOffset = new Vector4(Random.value, Random.value, Random.value, Random.value);
-            UnityEngine.Random.state = oldState;
+            using (new HoldRandomStateScope(Seed))
+            {
+                m_uvOffset = new Vector4(Random.value, Random.value, Random.value, Random.value);
+            }
         }
 
-        private void GenerateVoxelsAndMesh() {
-            m_voxels = new VoxelGrid(m_size);
-            // TODO: Support a SEED type as well as a CUSTOM type
-            // If seed, gen from seed. If custom, load from specified file? From a field?
-        
-            // Load catalog gem if one was specified!
-            if (m_gemType != GemTypes.CUSTOM)
+        private void UpdateVoxelsAndMesh() {
+            if (m_voxels == null || m_voxels.m_extents != m_size)
             {
-                // Getting a type from a different assembly is fun. GemTypes needs to be in the same assembly as the types themselves.
-                // Provide the fully qualified name to get the type!
-                Type gemClass = Type.GetType(typeof(GemTypes).Namespace + "." + m_gemType);
-                if (gemClass != null)
-                {
-                    m_voxels = (VoxelGrid)Activator.CreateInstance(gemClass);
-                    UpdateMesh();
-                }
+                m_voxels = new VoxelGrid(m_size);
             }
-            // Otherwise, generate a random gem.
-            else
+
+            switch (m_voxelsSource)
             {
-                m_voxels.GenerateFromSeed(m_seed, threshold: true, bias: m_purityBias);
-                UpdateMesh();
+                case VoxelsSource.Custom:
+                {
+                    // Just regenerate the meshes
+                    UpdateMeshes();
+                    break;
+                }
+                case VoxelsSource.Seed:
+                {
+                    // Generate voxels from seed, and meshes
+                    m_voxels.GenerateFromSeed(m_seed, threshold: true, bias: m_purityBias);
+                    UpdateMeshes();
+                    break;
+                }
+                case VoxelsSource.Catalog:
+                {
+                    // Load catalog gem
+                    // Getting a type from a different assembly is fun. GemTypes needs to be in the same assembly as the types themselves.
+                    // Provide the fully qualified name to get the type!
+                    Type gemClass = Type.GetType(typeof(GemCatalogType).Namespace + "." + m_gemCatalogType);
+                    if (gemClass != null)
+                    {
+                        m_voxels = (VoxelGrid)Activator.CreateInstance(gemClass);
+                        UpdateMeshes();
+                    }
+
+                    break;
+                }
             }
         }
 
         // TODO: This hitches. Thread creation of new mesh, only destroy & show new mesh once done?
         // Alternatively, cache tris for each voxel and only regenerate those which have changed?
-        private void UpdateMesh()
+        private void UpdateMeshes()
         {
             if (m_voxels == null)
             {
@@ -127,31 +235,36 @@ namespace GemCutting
                 Destroy(visMesh);
             }
             m_meshes.Clear();
-        
+
+            if (m_useMaterialInstances && !m_materialInstances.Any())
+            {
+                GenerateMaterialInstances();
+            }
+
             // Pad the voxel grid to ensure we see edges.
-            VoxelGrid visualGrid = new VoxelGrid(m_voxels.m_extents + new Vector3Int(3,3,3), m_voxels.m_defaultValue);
+            VoxelGrid visualGrid = new(m_voxels.m_extents + new Vector3Int(3,3,3), m_voxels.m_defaultValue);
             visualGrid.CopyFrom(m_voxels, 2, 2, 2);
 
             //Profiling.Profiler.BeginSample("Gem - Marching Cubes");
             Marching marching = new MarchingCubes(0.0f);
-            List<Vector3> verts = new List<Vector3>();
-            List<int> indices = new List<int>();
+            List<Vector3> verts = new();
+            List<int> indices = new();
             marching.Generate(visualGrid.m_values, visualGrid.m_extents.x, visualGrid.m_extents.y, visualGrid.m_extents.z, verts, indices);
             // Weld verts in resulting mesh
-            CustomMesh toWeld = new CustomMesh
+            CustomMesh toWeld = new()
             {
                 Triangles = indices.ToArray(),
                 Vertices = verts.ToArray()
             };
             toWeld.GenerateHardNormals();
             toWeld.GenerateTriplanarUVs();
-            MeshWelder welder = new MeshWelder(toWeld);
+            MeshWelder welder = new(toWeld);
             //Profiling.Profiler.EndSample();
 
             // Welder returns tri indices in reverse order, for some reason
             welder.CustomMesh.Triangles = welder.CustomMesh.Triangles.Reverse().ToArray();
         
-            Mesh mesh = new Mesh
+            Mesh mesh = new()
             {
                 indexFormat = IndexFormat.UInt32
             };
@@ -163,10 +276,10 @@ namespace GemCutting
             mesh.RecalculateTangents();
 
             // Multiple materials used like multi-pass rendering. Mesh for each material.
-            foreach (Material material in m_materials)
+            foreach (Material material in UsedMaterials)
             {
                 // TODO: Prefab for gem meshes?
-                GameObject go = new GameObject("Mesh")
+                GameObject go = new($"Mesh_{material.name}")
                 {
                     transform =
                     {
@@ -205,7 +318,7 @@ namespace GemCutting
             Vector3 localCutNormal = Quaternion.Inverse(transform.rotation) * cutPlaneNormal;
             Vector3Int planePos = m_voxels.GetCoordinateFurthestAlongNormal(localCutNormal);
             m_voxels.ClearPointsBeyondPlane(planePos, localCutNormal);
-            UpdateMesh();
+            UpdateMeshes();
             UpdateSlicePreview(cutPlaneNormal);
         }
         
@@ -214,11 +327,10 @@ namespace GemCutting
             Vector3 localCutNormal = Quaternion.Inverse(transform.rotation) * cutPlaneNormal;
             Vector3Int planePos = m_voxels.GetCoordinateFurthestAlongNormal(localCutNormal);
             Vector3 planeWorldPos = CoordToWorldPos(planePos.x, planePos.y, planePos.z);
-            foreach (Material material in m_materials)
+            foreach (Material material in UsedMaterials)
             {
                 material.SetVector(CutPlanePositionProperty, new Vector4(planeWorldPos.x, planeWorldPos.y, planeWorldPos.z, 0));
                 material.SetVector(CutPlaneNormalProperty, new Vector4(cutPlaneNormal.x, cutPlaneNormal.y, cutPlaneNormal.z, 0));
-                material.SetVector(UVOffsetProperty, m_uvOffset);
             }
         }
 
@@ -282,13 +394,13 @@ namespace GemCutting
         private void OnDrawGizmos()
         {
             // Editor view that shows extents of gem, with optional slices into voxels
-            Color gizmoColor = Selection.Contains(this.gameObject) ? Color.black : Color.yellow;
+            Color gizmoColor = Selection.Contains(gameObject) ? Color.black : Color.yellow;
             // Dim gizmo during play, because there's probably a visualized mesh we wanna see!
             gizmoColor.a = Application.isPlaying ? .1f : .3f;
             Gizmos.color = gizmoColor;
 
             // Draw wireframe if selected
-            if (Selection.Contains(this.gameObject))
+            if (Selection.Contains(gameObject))
             {
                 Gizmos.DrawWireCube(transform.position, new Vector3(Size.x, Size.y, Size.z));
             }

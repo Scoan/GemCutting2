@@ -46,9 +46,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_showGizmoPlanes: 1
   m_showVoxelValues: 0
+  m_useMaterialInstances: 1
   m_materials:
   - {fileID: 2100000, guid: e48f6822a755c0343a3d72fc26837b0c, type: 2}
-  m_gemType: 0
+  m_voxelsSource: 1
+  m_gemCatalogType: 0
   m_size: {x: 7, y: 7, z: 7}
   m_seed: 42069
   m_purityBias: 0.15

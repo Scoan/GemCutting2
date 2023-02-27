@@ -5,9 +5,10 @@ using UnityEngine;
 
 namespace GemCutting
 {
+    [Serializable]
     public class VoxelGrid
     {
-        private static readonly float TOLERANCE = .001f;
+        private static readonly float Tolerance = .001f;
         
         public Vector3Int m_extents;
         public float[] m_values;
@@ -32,7 +33,7 @@ namespace GemCutting
         public bool Equals(VoxelGrid other)
         {
             return (m_values.Length == other.m_values.Length) 
-                   && !m_values.Where((t, idx) => Math.Abs(t - other.m_values[idx]) > TOLERANCE).Any();
+                   && !m_values.Where((t, idx) => Math.Abs(t - other.m_values[idx]) > Tolerance).Any();
         }
 
         public int CoordToIdx(Vector3Int coord)
@@ -89,6 +90,7 @@ namespace GemCutting
             SetVal(CoordToIdx(coordinate), val);
         }
 
+        // ReSharper disable once UnusedParameter.Local
         private void Shift(Vector3Int shiftVector, bool resize = false)
         {
             // Offsets voxels in the supplied direction.
@@ -107,7 +109,7 @@ namespace GemCutting
                 // TODO: Take resize flag into account
                 if ((newIdx < 0 || newIdx >= m_values.Length))
                 {
-                    if (Math.Abs(m_values[idx] - m_defaultValue) > TOLERANCE)
+                    if (Math.Abs(m_values[idx] - m_defaultValue) > Tolerance)
                     {
                         Debug.LogError(
                             $"Tried to push real data {m_values[idx]} from idx {idx} to idx {newIdx}, off the grid. BAD!");
@@ -225,7 +227,7 @@ namespace GemCutting
             for (int x = 0; x < m_extents.x; x++)
             {
                 float[] vals = GetYZPlane(x);
-                if (vals.Any(val => Math.Abs(val - m_defaultValue) > TOLERANCE))
+                if (vals.Any(val => Math.Abs(val - m_defaultValue) > Tolerance))
                 {
                     xMin = x;
                     break;
@@ -235,7 +237,7 @@ namespace GemCutting
             for (int x = m_extents.x - 1; x >= 0; x--)
             {
                 float[] vals = GetYZPlane(x);
-                if (vals.Any(val => Math.Abs(val - m_defaultValue) > TOLERANCE))
+                if (vals.Any(val => Math.Abs(val - m_defaultValue) > Tolerance))
                 {
                     xMax = x;
                     break;
@@ -247,7 +249,7 @@ namespace GemCutting
             for (int y = 0; y < m_extents.y; y++)
             {
                 float[] vals = GetXZPlane(y);
-                if (vals.Any(val => Math.Abs(val - m_defaultValue) > TOLERANCE))
+                if (vals.Any(val => Math.Abs(val - m_defaultValue) > Tolerance))
                 {
                     yMin = y;
                     break;
@@ -257,7 +259,7 @@ namespace GemCutting
             for (int y = m_extents.y - 1; y >= 0; y--)
             {
                 float[] vals = GetXZPlane(y);
-                if (vals.Any(val => Math.Abs(val - m_defaultValue) > TOLERANCE))
+                if (vals.Any(val => Math.Abs(val - m_defaultValue) > Tolerance))
                 {
                     yMax = y;
                     break;
@@ -269,7 +271,7 @@ namespace GemCutting
             for (int z = 0; z < m_extents.z; z++)
             {
                 float[] vals = GetXYPlane(z);
-                if (vals.Any(val => Math.Abs(val - m_defaultValue) > TOLERANCE))
+                if (vals.Any(val => Math.Abs(val - m_defaultValue) > Tolerance))
                 {
                     zMin = z;
                     break;
@@ -279,7 +281,7 @@ namespace GemCutting
             for (int z = m_extents.z - 1; z >= 0; z--)
             {
                 float[] vals = GetXYPlane(z);
-                if (vals.Any(val => Math.Abs(val - m_defaultValue) > TOLERANCE))
+                if (vals.Any(val => Math.Abs(val - m_defaultValue) > Tolerance))
                 {
                     zMax = z;
                     break;
@@ -492,45 +494,44 @@ namespace GemCutting
             // Randomly generate values from a seed.
             // 
             // Ensure deterministic randomness and save current random state to restore.
-            UnityEngine.Random.State oldState = UnityEngine.Random.state;
-            UnityEngine.Random.InitState(seed);
-            // TODO: Expose perlin/fractal params?
-            INoise perlin = new PerlinNoise(seed, .1f);
-            FractalNoise fractal = new FractalNoise(perlin, 1, 1.2f);
-
-            // TODO: Erode the fractal? Try and get a bubblier/veinier look? To test:
-            //       Make a big (60x60x60) volume, remove the threshold op,
-            //       and set the scale factor to 50 to see the noise on a more detailed level for tweaking
-
-            //Fill voxels with values.
-            for (int x = 0; x < m_extents.x; x++)
+            using (new HoldRandomStateScope(seed))
             {
-                for (int y = 0; y < m_extents.y; y++)
-                {
-                    for (int z = 0; z < m_extents.z; z++)
-                    {
-                        // Threshold'd perlin noise. TODO: Expose scale?
-                        float scaleFactor = .3f;
-                        float fx = x / scaleFactor;
-                        float fy = y / scaleFactor;
-                        float fz = z / scaleFactor;
+                // TODO: Expose perlin/fractal params?
+                INoise perlin = new PerlinNoise(seed, .1f);
+                FractalNoise fractal = new FractalNoise(perlin, 1, 1.2f);
 
-                        float val = fractal.Sample3D(fx, fy, fz);
-                        if (threshold)
+                // TODO: Erode the fractal? Try and get a bubblier/veinier look? To test:
+                //       Make a big (60x60x60) volume, remove the threshold op,
+                //       and set the scale factor to 50 to see the noise on a more detailed level for tweaking
+
+                //Fill voxels with values.
+                for (int x = 0; x < m_extents.x; x++)
+                {
+                    for (int y = 0; y < m_extents.y; y++)
+                    {
+                        for (int z = 0; z < m_extents.z; z++)
                         {
-                            SetVal(new Vector3Int(x, y, z), 
-                                val + bias > 0 ? 1 : -1);
-                        }
-                        else
-                        {
-                            SetVal(new Vector3Int(x, y, z), 
-                                val);
+                            // Threshold'd perlin noise. TODO: Expose scale?
+                            float scaleFactor = .3f;
+                            float fx = x / scaleFactor;
+                            float fy = y / scaleFactor;
+                            float fz = z / scaleFactor;
+
+                            float val = fractal.Sample3D(fx, fy, fz);
+                            if (threshold)
+                            {
+                                SetVal(new Vector3Int(x, y, z), 
+                                    val + bias > 0 ? 1 : -1);
+                            }
+                            else
+                            {
+                                SetVal(new Vector3Int(x, y, z), 
+                                    val);
+                            }
                         }
                     }
                 }
             }
-            // Restore random state
-            UnityEngine.Random.state = oldState;
         }
         
         public Vector3Int GetCoordinateClosestToPlane(Vector3 planePos, Vector3 planeNormal)
@@ -541,7 +542,7 @@ namespace GemCutting
 
             for (int idx=0; idx < m_values.Length; idx++)
             {
-                if (Math.Abs(m_values[idx] - m_defaultValue) < TOLERANCE)
+                if (Math.Abs(m_values[idx] - m_defaultValue) < Tolerance)
                     continue;
 
                 Vector3Int curCoord = IdxToCoord(idx);
@@ -568,7 +569,7 @@ namespace GemCutting
 
             for (int idx = 0; idx < m_values.Length; idx++)
             {
-                if (Math.Abs(m_values[idx] - m_defaultValue) < TOLERANCE)
+                if (Math.Abs(m_values[idx] - m_defaultValue) < Tolerance)
                     continue;
 
                 Vector3Int curCoord = IdxToCoord(idx);
@@ -587,7 +588,7 @@ namespace GemCutting
             for (int idx = 0; idx < m_values.Length; idx++)
             {
                 // Don't process pts which are already clear
-                if (Math.Abs(m_values[idx] - m_defaultValue) < TOLERANCE)
+                if (Math.Abs(m_values[idx] - m_defaultValue) < Tolerance)
                     continue;
                 // Clear points w/ a positive or 0 distance from plane
                 if (MyMath.DistanceToPlane(IdxToCoord(idx), planePos, planeNormal) >= 0 - 1e-3)

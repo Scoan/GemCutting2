@@ -76,7 +76,7 @@ public class CatalogView : MonoBehaviour
     {
         for (int idx = 0; idx < panels.Count; idx++)
         {
-            panels[idx].SetGem(startingIdx + (GemTypes)idx + 1);
+            panels[idx].SetGem(startingIdx + (GemCatalogType)idx + 1);
         }
     }
 }

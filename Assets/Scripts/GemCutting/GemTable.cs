@@ -2,7 +2,6 @@
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
-using Random = System.Random;
 
 namespace GemCutting
 {
@@ -54,13 +53,6 @@ namespace GemCutting
                 }
                 // TODO: Perf of calling this every frame?
                 m_gem.UpdateSlicePreview(m_curCutAngle);
-            }
-        }
-
-        void FixedUpdate () {
-            if (m_gem != null && m_postRotateAction != null)
-            {
-                //ProcessRotation();
             }
         }
 
@@ -138,15 +130,24 @@ namespace GemCutting
             {
                 NextCatalogGem();
             }
+            else if (Input.GetKeyDown(KeyCode.L))
+            {
+                // TODO: Copy gem to clipboard
+            }
+            else if (Input.GetKeyDown(KeyCode.K))
+            {
+                // TODO: Paste gem from clipboard
+            }
         }
 
-        // TODO: Move these to general controls
+        // TODO: Move these to general controls?
         private void GenerateRandomGem()
         {
             if (m_gem)
             {
+                m_gem.VoxelsSource = VoxelsSource.Seed;
                 m_gem.Seed = UnityEngine.Random.Range(0, 1000000);
-                m_gem.GemType = GemTypes.CUSTOM;
+                m_gem.Initialize();
             }
         }
         
@@ -154,16 +155,20 @@ namespace GemCutting
         {
             if (m_catalogGem)
             {
-                int numOptions = Enum.GetValues(typeof(GemTypes)).Length;
-                m_catalogGem.GemType = (GemTypes)((int)(m_catalogGem.GemType - 1 + numOptions) % numOptions);
+                m_catalogGem.VoxelsSource = VoxelsSource.Catalog;
+                int numOptions = Enum.GetValues(typeof(GemCatalogType)).Length;
+                m_catalogGem.GemCatalogType = (GemCatalogType)((int)(m_catalogGem.GemCatalogType - 1 + numOptions) % numOptions);
+                m_catalogGem.Initialize();
             }
         }
         private void NextCatalogGem()
         {
             if (m_catalogGem)
             {
-                int numOptions = Enum.GetValues(typeof(GemTypes)).Length;
-                m_catalogGem.GemType = (GemTypes)((int)(m_catalogGem.GemType + 1 + numOptions) % numOptions);
+                m_catalogGem.VoxelsSource = VoxelsSource.Catalog;
+                int numOptions = Enum.GetValues(typeof(GemCatalogType)).Length;
+                m_catalogGem.GemCatalogType = (GemCatalogType)((int)(m_catalogGem.GemCatalogType + 1 + numOptions) % numOptions);
+                m_catalogGem.Initialize();
             }
         }
 

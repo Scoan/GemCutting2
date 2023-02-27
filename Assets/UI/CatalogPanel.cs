@@ -49,7 +49,7 @@ public class CatalogPanel : MonoBehaviour {
         GameObject gemObject = Instantiate(gemPrefab);
         gemObject.layer = 8;
         _gem = gemObject.GetComponent<GemStone>();
-        SetGem(GemTypes.AidennMask);
+        SetGem(GemCatalogType.AidennMask);
 
         // Create camera
         GameObject camObject = Instantiate(camPrefab);
@@ -63,11 +63,11 @@ public class CatalogPanel : MonoBehaviour {
         camObject.transform.SetParent(_panelObject.transform);
     }
 
-    public void SetGem(GemTypes gemType)
+    public void SetGem(GemCatalogType gemCatalogType)
     {
         if (_gem == null)
             return;
-        _gem.GemType = gemType;
+        _gem.GemCatalogType = gemCatalogType;
     }
 
     public void OnVisibilityToggled(bool visible)
