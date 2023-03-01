@@ -597,6 +597,32 @@ namespace GemCutting
                 }
             }
         }
+
+        public Bounds BoundsOfInterestingValues()
+        {
+            // Returns AABB of interesting values
+            
+            Bounds bounds = new();
+            bool haveOne = false;
+            for (int idx = 0; idx < m_values.Length; idx++)
+            {
+                if (Math.Abs(m_values[idx] - m_defaultValue) > Tolerance)
+                {
+                    // First value initializes bounds
+                    if (!haveOne)
+                    {
+                        bounds.center = IdxToCoord(idx);
+                        bounds.extents = Vector3.zero;
+                        haveOne = true;
+                        continue;
+                    }
+                    // Subsequent values extend the bounds
+                    bounds.Encapsulate(IdxToCoord(idx));
+                }
+            }
+
+            return bounds;
+        }
     }
 
 }

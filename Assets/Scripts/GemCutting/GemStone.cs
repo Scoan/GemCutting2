@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using DG.Tweening;
 using External.MeshWelder;
 using MarchingCubesProject;
 using UnityEditor;
@@ -19,7 +20,7 @@ namespace GemCutting
         [SerializeField] private int m_seed;
         [SerializeField] private float m_purityBias;
         [SerializeField] private VoxelGrid m_voxels;
-        
+
         [NonSerialized] private bool m_valid;
 
         public List<Material> Materials => m_materials;
@@ -108,6 +109,7 @@ namespace GemCutting
         private static readonly int CutPlanePositionProperty = Shader.PropertyToID("_CutPlanePosition");
         private static readonly int CutPlaneNormalProperty = Shader.PropertyToID("_CutPlaneNormal");
         private static readonly int UVOffsetProperty = Shader.PropertyToID("_UVOffset");
+        private static readonly int VisualGridOffset = 3;
 
         [Header("Debugging")]
         [SerializeField] private bool m_showGizmoPlanes = true;
@@ -121,17 +123,19 @@ namespace GemCutting
         [SerializeField] private int m_seed;
         [SerializeField] private float m_purityBias = .05f;  // 0 = ~50% voids, 50% solids. Higher = fewer voids.
     
-        private VoxelGrid m_voxels;
-        private readonly List<GameObject> m_meshes = new();
-        private readonly List<Material> m_materialInstances = new();
+        [NonSerialized] private VoxelGrid m_voxels;
+        [NonSerialized] private readonly List<GameObject> m_meshes = new();
+        [NonSerialized] private readonly List<Material> m_materialInstances = new();
+        // We offset the gem mesh(es) by this to keep them centered
+        [NonSerialized] private Vector3 m_meshCenterCoord;
         // Material properties derived from seed
-        private Vector4 m_uvOffset;
+        [NonSerialized] private Vector4 m_uvOffset;
+
 
         public List<Material> BaseMaterials => m_materials;
         private List<Material> UsedMaterials => m_materialInstances.Any() ? m_materialInstances : m_materials;
         public float PurityBias => m_purityBias;
         public VoxelGrid Voxels => m_voxels;
-        
         public Vector3Int Size => m_voxels?.m_extents ?? m_size;
 
         public int Seed
@@ -151,7 +155,7 @@ namespace GemCutting
             get => m_gemCatalogType;
             set => m_gemCatalogType = value;
         }
-        
+
         #region Serialization
         public string Save()
         {
@@ -252,6 +256,7 @@ namespace GemCutting
                 {
                     // Generate voxels from seed, and meshes
                     m_voxels.GenerateFromSeed(m_seed, threshold: true, bias: m_purityBias);
+                    m_meshCenterCoord = m_voxels.BoundsOfInterestingValues().center;
                     UpdateMeshes();
                     break;
                 }
@@ -264,6 +269,7 @@ namespace GemCutting
                     if (gemClass != null)
                     {
                         m_voxels = (VoxelGrid)Activator.CreateInstance(gemClass);
+                        m_meshCenterCoord = m_voxels.BoundsOfInterestingValues().center;
                         UpdateMeshes();
                     }
 
@@ -294,8 +300,10 @@ namespace GemCutting
             }
 
             // Pad the voxel grid to ensure we see edges.
-            VoxelGrid visualGrid = new(m_voxels.m_extents + new Vector3Int(3,3,3), m_voxels.m_defaultValue);
-            visualGrid.CopyFrom(m_voxels, 2, 2, 2);
+            VoxelGrid visualGrid = new(
+                m_voxels.m_extents + new Vector3Int(VisualGridOffset, VisualGridOffset, VisualGridOffset), 
+                m_voxels.m_defaultValue);
+            visualGrid.CopyFrom(m_voxels, VisualGridOffset-1, VisualGridOffset-1, VisualGridOffset-1);
 
             //Profiling.Profiler.BeginSample("Gem - Marching Cubes");
             Marching marching = new MarchingCubes(0.0f);
@@ -345,24 +353,50 @@ namespace GemCutting
                 go.layer = gameObject.layer;
 
                 go.transform.localPosition = new Vector3(
-                    -(float)visualGrid.m_extents.x / 2.0f, 
-                    -(float)visualGrid.m_extents.y / 2.0f, 
-                    -(float)visualGrid.m_extents.z / 2.0f);
+                    -(float)(m_voxels.m_extents.x + VisualGridOffset) / 2.0f, 
+                    -(float)(m_voxels.m_extents.y + VisualGridOffset) / 2.0f, 
+                    -(float)(m_voxels.m_extents.z + VisualGridOffset) / 2.0f) 
+                                             - CoordToLocalPos(m_meshCenterCoord);
                 go.transform.localRotation = Quaternion.identity;
                 go.transform.localScale = Vector3.one;
                 m_meshes.Add(go);
             }
         }
 
-        private Vector3 CoordToWorldPos(int x, int y, int z)
+        private Vector3 CoordToLocalPos(Vector3 val)
         {
             // We center the voxels on our transform, so we need to offset a given coord to get its world-space position
             // Start from zero, easier than figuring out if we need to add or subtract
             // .5,.5,.5 is b/c our cells are justified lower-left, we wanna treat center of cell as world position though
             Vector3 localPos = -(new Vector3(Size.x / 2.0f, Size.y / 2.0f, Size.z / 2.0f)) 
-                   + (new Vector3(x, y, z)) + new Vector3(.5f,.5f,.5f);
+                               + (new Vector3(val.x, val.y, val.z)) 
+                               + new Vector3(.5f,.5f,.5f);
+            return localPos;
+        }
+        
+        private Vector3 CoordToWorldPos(Vector3 val)
+        {
             Transform xform = transform;
-            return (Vector3)(xform.localToWorldMatrix * localPos) + xform.position;
+            return (Vector3)(xform.localToWorldMatrix * CoordToLocalPos(val)) + xform.position;
+        }
+
+        private void TweenCenterCoord()
+        {
+            DOTween.To(() => m_meshCenterCoord,
+                (val) =>
+                {
+                    m_meshCenterCoord = val;
+                    foreach (GameObject go in m_meshes)
+                    {
+                        go.transform.localPosition = new Vector3(
+                            -(float)(m_voxels.m_extents.x + VisualGridOffset) / 2.0f, 
+                            -(float)(m_voxels.m_extents.x + VisualGridOffset) / 2.0f, 
+                            -(float)(m_voxels.m_extents.x + VisualGridOffset) / 2.0f) 
+                                                     - CoordToLocalPos(m_meshCenterCoord);
+                    }
+                },
+                m_voxels.BoundsOfInterestingValues().center,
+                .25f);
         }
 
         public void Slice(Vector3 cutPlaneNormal)
@@ -370,6 +404,8 @@ namespace GemCutting
             Vector3 localCutNormal = Quaternion.Inverse(transform.rotation) * cutPlaneNormal;
             Vector3Int planePos = m_voxels.GetCoordinateFurthestAlongNormal(localCutNormal);
             m_voxels.SetValuesAtAndBeyondPlane(planePos, localCutNormal, m_voxels.m_defaultValue);
+
+            TweenCenterCoord();
             UpdateMeshes();
             UpdateSlicePreview(cutPlaneNormal);
         }
@@ -378,7 +414,7 @@ namespace GemCutting
         {
             Vector3 localCutNormal = Quaternion.Inverse(transform.rotation) * cutPlaneNormal;
             Vector3Int planePos = m_voxels.GetCoordinateFurthestAlongNormal(localCutNormal);
-            Vector3 planeWorldPos = CoordToWorldPos(planePos.x, planePos.y, planePos.z);
+            Vector3 planeWorldPos = CoordToWorldPos(planePos) - CoordToWorldPos(m_meshCenterCoord);
             foreach (Material material in UsedMaterials)
             {
                 material.SetVector(CutPlanePositionProperty, new Vector4(planeWorldPos.x, planeWorldPos.y, planeWorldPos.z, 0));
@@ -522,7 +558,7 @@ namespace GemCutting
             {
                 float val = m_voxels.m_values[idx];
                 Vector3Int coords = m_voxels.IdxToCoord(idx);
-                Vector3 pos = cam.WorldToScreenPoint(CoordToWorldPos(coords.x, coords.y, coords.z));
+                Vector3 pos = cam.WorldToScreenPoint(CoordToWorldPos(coords) - CoordToWorldPos(m_meshCenterCoord));
                 GUI.Label(new Rect(pos.x, Screen.height-pos.y, 150, 130), 
                     val.ToString(CultureInfo.InvariantCulture),
                     val > 0 ? positiveStyle : negativeStyle);   
