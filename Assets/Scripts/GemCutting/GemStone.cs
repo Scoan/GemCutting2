@@ -5,6 +5,7 @@ using System.Linq;
 using DG.Tweening;
 using External.MeshWelder;
 using MarchingCubesProject;
+using SCoan.Mesh;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -317,7 +318,6 @@ namespace GemCutting
                 Vertices = verts.ToArray()
             };
             toWeld.GenerateHardNormals();
-            toWeld.GenerateTriplanarUVs();
             MeshWelder welder = new(toWeld);
             //Profiling.Profiler.EndSample();
 
@@ -331,7 +331,7 @@ namespace GemCutting
             mesh.SetVertices(welder.CustomMesh.Vertices);
             mesh.SetTriangles(welder.CustomMesh.Triangles, 0);
             mesh.SetNormals(welder.CustomMesh.Normals);
-            mesh.SetUVs(0, welder.CustomMesh.UVs);
+            mesh.GenerateTriplanarUVs(0);
             mesh.RecalculateBounds();
             mesh.RecalculateTangents();
 
