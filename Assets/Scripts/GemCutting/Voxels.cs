@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using ProceduralNoiseProject;
+using SCoan.Math;
 using UnityEngine;
 
 namespace GemCutting
