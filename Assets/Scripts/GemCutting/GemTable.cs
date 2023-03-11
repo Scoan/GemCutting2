@@ -139,7 +139,7 @@ namespace GemCutting
             }
             else if (Input.GetKeyDown(KeyCode.P))
             {
-                Debug.LogWarning(m_gem.Compare(m_catalogGem));
+                Debug.LogWarning(CompareGem());
             }
             else if (Input.GetKeyDown(KeyCode.LeftBracket))
             {
@@ -151,22 +151,37 @@ namespace GemCutting
             }
             else if (Input.GetKeyDown(KeyCode.K))
             {
-                if (m_gem)
-                {
-                    m_gem.Save();
-                }
+                SaveGem();
             }
             else if (Input.GetKeyDown(KeyCode.L))
             {
-                if (m_gem)
-                {
-                    m_gem.Load();
-                }
+                LoadGem();
             }
         }
 
         // TODO: Move these to general controls?
-        private void GenerateRandomGem()
+        public void SaveGem()
+        {
+            if (m_gem)
+            {
+                m_gem.Save();
+            }
+        }
+        
+        public void LoadGem()
+        {
+            if (m_gem)
+            {
+                m_gem.Load();
+            }
+        }
+
+        public bool CompareGem()
+        {
+            return m_gem.Compare(m_catalogGem);
+        }
+        
+        public void GenerateRandomGem()
         {
             if (m_gem)
             {
@@ -175,25 +190,33 @@ namespace GemCutting
                 m_gem.Initialize();
             }
         }
+
+        public void SetCatalogGem(GemCatalogType gemType)
+        {
+            if (m_catalogGem)
+            {
+                m_catalogGem.VoxelsSource = VoxelsSource.Catalog;
+                m_catalogGem.GemCatalogType = gemType;
+                m_catalogGem.Initialize();
+            }
+        }
         
         private void PreviousCatalogGem()
         {
             if (m_catalogGem)
             {
-                m_catalogGem.VoxelsSource = VoxelsSource.Catalog;
                 int numOptions = Enum.GetValues(typeof(GemCatalogType)).Length;
-                m_catalogGem.GemCatalogType = (GemCatalogType)((int)(m_catalogGem.GemCatalogType - 1 + numOptions) % numOptions);
-                m_catalogGem.Initialize();
+                GemCatalogType val = (GemCatalogType)((int)(m_catalogGem.GemCatalogType - 1 + numOptions) % numOptions);
+                SetCatalogGem(val);
             }
         }
         private void NextCatalogGem()
         {
             if (m_catalogGem)
             {
-                m_catalogGem.VoxelsSource = VoxelsSource.Catalog;
                 int numOptions = Enum.GetValues(typeof(GemCatalogType)).Length;
-                m_catalogGem.GemCatalogType = (GemCatalogType)((int)(m_catalogGem.GemCatalogType + 1 + numOptions) % numOptions);
-                m_catalogGem.Initialize();
+                GemCatalogType val = (GemCatalogType)((int)(m_catalogGem.GemCatalogType + 1 + numOptions) % numOptions);
+                SetCatalogGem(val);
             }
         }
 
